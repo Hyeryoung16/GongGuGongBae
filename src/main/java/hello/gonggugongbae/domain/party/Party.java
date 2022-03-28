@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Party {
 
+    private Long partyId;
     private Long memberId; // 팟 생성 회원
     private Item item; // 대상물건(음식)
     private int partyMemberNum; // 인원
@@ -16,7 +17,8 @@ public class Party {
     private Location receiveLocation; // 수령 장소
     private List<Long> partyMembers = new ArrayList<>(); // 팟 참여 멤버
 
-    public Party(Long memberId, Item item, int partyMemberNum, int duration, int minOrderPricePerMember, Location receiveLocation) {
+    public Party(Long partyId, Long memberId, Item item, int partyMemberNum, int duration, int minOrderPricePerMember, Location receiveLocation) {
+        this.partyId = partyId;
         this.memberId = memberId;
         this.item = item;
         this.partyMemberNum = partyMemberNum;
@@ -24,6 +26,14 @@ public class Party {
         this.minOrderPricePerMember = minOrderPricePerMember;
         this.receiveLocation = receiveLocation;
         this.partyMembers.add(memberId);
+    }
+
+    public Long getPartyId() {
+        return partyId;
+    }
+
+    public void setPartyId(Long partyId) {
+        this.partyId = partyId;
     }
 
     public Long getMemberId() {

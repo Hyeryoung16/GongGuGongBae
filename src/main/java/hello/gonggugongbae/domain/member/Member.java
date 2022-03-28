@@ -1,12 +1,22 @@
 package hello.gonggugongbae.domain.member;
 
 public class Member {
+    private Long id;
     private String username;
-    private int age;
+    private String address;
 
-    public Member(String username, int age) {
+    public Member(Long id, String username, String address) {
+        this.id = id;
         this.username = username;
-        this.age = age;
+        this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -17,11 +27,11 @@ public class Member {
         this.username = username;
     }
 
-    public int getAge() {
-        return age;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

@@ -1,4 +1,91 @@
+package hello.gonggugongbae.domain.party;
+
+import hello.gonggugongbae.domain.item.Item;
+import hello.gonggugongbae.domain.location.Location;
+import hello.gonggugongbae.domain.location.MyLocation;
+import hello.gonggugongbae.domain.member.Member;
+import hello.gonggugongbae.domain.member.MemberService;
+import hello.gonggugongbae.domain.member.MemberServiceImpl;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
 class PartyServiceImplTest {
-  
+
+    MemberService memberService = new MemberServiceImpl();
+    PartyService partyService = new PartyServiceImpl();
+
+    @Test
+    @DisplayName("수령장소가 위치정책을 만족하면, 파티 등록 가능")
+    void createPartySuccess(){
+        // when
+        Location myLocation = new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON);
+        Location receiveLocation = new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON);
+        Item item = new Item("itemA", "www.item.com", 9000, 3000);
+        Member member = new Member("hello1", myLocation);
+        Member joinedMember = memberService.join(member);
+        Party myParty = new Party(joinedMember.getId(), item, 3, 2,
+                3000, receiveLocation);
+
+        // then
+        Party savedParty = partyService.createParty(myParty);
+
+        // when
+        assertThat(savedParty).isNotNull();
+        assertThat(savedParty.getMemberId()).isEqualTo(joinedMember.getId());
+        assertThat(savedParty.getReceiveLocation()).isEqualTo(receiveLocation);
+
+        partyService.deletePartyById(joinedMember.getId(), myParty.getPartyId());
+    }
+
+    @Test
+    @DisplayName("수령장소가 위치정책을 위반하면, 파티 등록 불가능")
+    void createPartyFail(){
+        // when
+        Location myLocation = new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON);
+        Location receiveLocation = new Location(MyLocation.STATION_LAT, MyLocation.STATION_LON);
+        Item item = new Item("itemB", "www.item.com", 0, 3000);
+        Member member = new Member("hello2", myLocation);
+        Member joinedMember = memberService.join(member);
+        Party myParty = new Party(joinedMember.getId(), item, 2, 24,
+                0, receiveLocation);
+
+        // then
+        Party savedParty = partyService.createParty(myParty);
+
+        // when
+        assertThat(savedParty).isNull();
+    }
+
+    @Test
+    @DisplayName("회원 주변의 파티 찾기")
+    void findPartyAroundMember(){
+        // when
+        Member memberA = new Member("memberA", new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
+        Member memberB = new Member("memberB", new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON));
+        Member memberC = new Member("memberC", new Location(MyLocation.STATION_LAT, MyLocation.STATION_LON));
+        memberService.join(memberA);
+        memberService.join(memberB);
+        memberService.join(memberC);
+
+        Item itemA = new Item("itemA", "www.itemA.com", 0, 3000);
+        Party partyA = new Party(memberA.getId(), itemA, 2, 24,
+                0, memberA.getAddress());
+        Party savedParty = partyService.createParty(partyA);
+
+        // when
+        List<Party> partyAroundMemberB = partyService.findPartyAroundMember(memberB.getId());
+        List<Party> partyAroundMemberC = partyService.findPartyAroundMember(memberC.getId());
+
+        // then
+        assertThat(partyAroundMemberB.size()).isEqualTo(1);
+        assertThat(partyAroundMemberC.size()).isEqualTo(0);
+
+        partyService.deletePartyById(memberA.getId(), savedParty.getPartyId());
+    }
 }

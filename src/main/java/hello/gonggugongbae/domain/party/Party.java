@@ -17,8 +17,7 @@ public class Party {
     private Location receiveLocation; // 수령 장소
     private List<Long> partyMembers = new ArrayList<>(); // 팟 참여 멤버
 
-    public Party(Long partyId, Long memberId, Item item, int partyMemberNum, int duration, int minOrderPricePerMember, Location receiveLocation) {
-        this.partyId = partyId;
+    public Party(Long memberId, Item item, int partyMemberNum, int duration, int minOrderPricePerMember, Location receiveLocation) {
         this.memberId = memberId;
         this.item = item;
         this.partyMemberNum = partyMemberNum;

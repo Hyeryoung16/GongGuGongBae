@@ -12,10 +12,19 @@ import java.util.List;
 
 public class PartyServiceImpl implements PartyService{
 
-    private final MemberRepository memberRepository = new MemberRepositoryMemory(); // 멤버 저장소
-    private final PartyRepository partyRepository = new PartyRepositoryMemory(); // 파티 저장소
-    private final LocationPolicy locationPolicy = new LocationPolicyImpl(); // 위치 정책
+    // private final MemberRepository memberRepository = new MemberRepositoryMemory(); // 멤버 저장소
+    // private final PartyRepository partyRepository = new PartyRepositoryMemory(); // 파티 저장소
+    // private final LocationPolicy locationPolicy = new LocationPolicyImpl(); // 위치 정책
 
+    private final MemberRepository memberRepository;
+    private final PartyRepository partyRepository;
+    private final LocationPolicy locationPolicy;
+
+    public PartyServiceImpl(MemberRepository memberRepository, PartyRepository partyRepository, LocationPolicy locationPolicy) {
+        this.memberRepository = memberRepository;
+        this.partyRepository = partyRepository;
+        this.locationPolicy = locationPolicy;
+    }
     @Override
     public Party createParty(Party party) {
         Member host = memberRepository.findById(party.getMemberId()); // 팟 호스트

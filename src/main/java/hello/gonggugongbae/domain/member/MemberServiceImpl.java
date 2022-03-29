@@ -4,7 +4,12 @@ import java.util.List;
 
 public class MemberServiceImpl implements MemberService{
 
-    MemberRepository memberRepository = new MemberRepositoryMemory(); // 회원 저장소 객체
+    // MemberRepository memberRepository = new MemberRepositoryMemory(); // 회원 저장소 객체
+    MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public Member join(Member member) {

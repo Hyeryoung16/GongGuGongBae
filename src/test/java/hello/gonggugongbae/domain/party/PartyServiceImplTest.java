@@ -1,5 +1,6 @@
 package hello.gonggugongbae.domain.party;
 
+import hello.gonggugongbae.AppConfig;
 import hello.gonggugongbae.domain.item.Item;
 import hello.gonggugongbae.domain.location.Location;
 import hello.gonggugongbae.domain.location.MyLocation;
@@ -7,6 +8,7 @@ import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberService;
 import hello.gonggugongbae.domain.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +19,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PartyServiceImplTest {
 
-    MemberService memberService = new MemberServiceImpl();
-    PartyService partyService = new PartyServiceImpl();
+    // MemberService memberService = new MemberServiceImpl();
+    // PartyService partyService = new PartyServiceImpl();
+
+    MemberService memberService;
+    PartyService partyService;
+
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+        partyService = appConfig.partyService();
+    }
 
     @Test
     @DisplayName("수령장소가 위치정책을 만족하면, 파티 등록 가능")

@@ -16,7 +16,7 @@ class LocationPolicyImplTest {
     void near() {
         // given
         Location location1 = new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON);
-        Location location2 = new Location(MyLocation.PARK_LAT, MyLocation.GYM_LON);
+        Location location2 = new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON);
 
         // when
         boolean isNear = locationPolicy.isNearLocation(location1, location2);

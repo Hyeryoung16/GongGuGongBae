@@ -11,12 +11,18 @@ import hello.gonggugongbae.domain.party.PartyRepository;
 import hello.gonggugongbae.domain.party.PartyRepositoryMemory;
 import hello.gonggugongbae.domain.party.PartyService;
 import hello.gonggugongbae.domain.party.PartyServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
+
+    @Bean
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
     }
 
+    @Bean
     public PartyService partyService(){
         return new PartyServiceImpl(
                 memberRepository(),
@@ -25,15 +31,19 @@ public class AppConfig {
         );
     }
 
+    @Bean
     public MemberRepository memberRepository(){
         return new MemberRepositoryMemory();
     }
 
+    @Bean
     public PartyRepository partyRepository(){
         return new PartyRepositoryMemory();
     }
 
+    @Bean
     public LocationPolicy locationPolicy() {
-        return new LocationPolicyImpl();
+        return new LocationPolicyImpl(); // 이부분만 이후에 변경하면 된다
+        // return new LocationPolicyImplV2();
     }
 }

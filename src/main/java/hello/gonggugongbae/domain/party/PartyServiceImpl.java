@@ -6,10 +6,13 @@ import hello.gonggugongbae.domain.location.LocationPolicyImpl;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberRepository;
 import hello.gonggugongbae.domain.member.MemberRepositoryMemory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PartyServiceImpl implements PartyService{
 
     // private final MemberRepository memberRepository = new MemberRepositoryMemory(); // 멤버 저장소
@@ -20,6 +23,7 @@ public class PartyServiceImpl implements PartyService{
     private final PartyRepository partyRepository;
     private final LocationPolicy locationPolicy;
 
+    @Autowired
     public PartyServiceImpl(MemberRepository memberRepository, PartyRepository partyRepository, LocationPolicy locationPolicy) {
         this.memberRepository = memberRepository;
         this.partyRepository = partyRepository;

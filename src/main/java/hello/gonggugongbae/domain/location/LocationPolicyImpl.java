@@ -1,5 +1,8 @@
 package hello.gonggugongbae.domain.location;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LocationPolicyImpl implements LocationPolicy{
 
     private double maxDistance = 1000;

@@ -12,9 +12,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class PartyApp {
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        PartyService partyService = applicationContext.getBean("partyService", PartyService.class);
-        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        PartyService partyService = applicationContext.getBean(PartyService.class);
+        MemberService memberService = applicationContext.getBean(MemberService.class);
 
         Member member = new Member("userB", new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON));
         memberService.join(member);

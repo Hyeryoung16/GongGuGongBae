@@ -1,12 +1,14 @@
 package hello.gonggugongbae.domain.party;
 
 import hello.gonggugongbae.domain.location.Location;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class PartyRepositoryMemory implements PartyRepository{
 
     private static Map<Long, Party> store = new HashMap<>(); // 파티 저장소

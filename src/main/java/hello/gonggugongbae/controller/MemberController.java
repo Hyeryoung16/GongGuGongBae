@@ -10,8 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class MemberSaveController {
-    @RequestMapping("/gggb/members/save")
+@RequestMapping("/gggb/members/")
+public class MemberController {
+
+    @RequestMapping("new-form")
+    public ModelAndView process(){
+        return new ModelAndView("new-form");
+    }
+
+    @RequestMapping("save")
     public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         double lat = Double.parseDouble(request.getParameter("latitude"));

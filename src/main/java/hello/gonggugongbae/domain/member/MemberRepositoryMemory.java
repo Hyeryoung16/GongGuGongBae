@@ -1,13 +1,13 @@
 package hello.gonggugongbae.domain.member;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Repository
 public class MemberRepositoryMemory implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>(); // 회원 저장소

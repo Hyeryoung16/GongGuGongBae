@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+
+    <div class="py-5 text-center">
+        <h2>회원 목록</h2>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/basic/items/add}'|"
+                    type="button">상품 등록</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>회원명</th>
+                <th>위도</th>
+                <th>경도</th>
+                <th>참가팟</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td><a href="member.html" th:href="@{/basic/members/{memberId}(memberId=${member.id})}" th:text="${member.id}">ID</a></td>
+                <td><a href="member.html" th:href="@{|/basic/members/${member.id}|}" th:text="${member.username}">회원명</a></td>
+                <td th:text="${member.address.latitude}">10000</td>
+                <td th:text="${member.address.longitude}">10000</td>
+                <td th:text="${#lists.size(member.parties)}">10</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+</body>
+</html>

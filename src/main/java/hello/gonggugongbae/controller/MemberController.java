@@ -7,10 +7,7 @@ import hello.gonggugongbae.domain.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -19,25 +16,35 @@ import java.util.List;
 @Controller
 @RequestMapping("/gggb/members")
 public class MemberController {
-    
+
+    private final MemberService memberService; // TODO : 방법 맞는지 체크
+
     @Autowired
-    private MemberService memberService; // TODO : 방법 맞는지 체크
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @GetMapping // TODO : 전체 멤버조회는 이후 삭제
     public String members(Model model) {
         List<Member> allMembers = memberService.findAllMembers();
-        System.out.println("allMembers = " + allMembers);
         model.addAttribute("members", allMembers);
         return "basic/members";
     }
 
-    @GetMapping("join-form")
-    public String newForm(){
-        return "new-form";
+    @GetMapping("/{memberId}")
+    public String member(@PathVariable Long memberId, Model model){
+        Member member = memberService.findMemberById(memberId);
+        model.addAttribute("member",member);
+        return "basic/member";
     }
 
-    @PostMapping("save")
-    public String save(
+    @GetMapping("/add")
+    public String addForm(){
+        return "basic/memberAddForm";
+    }
+
+    @PostMapping("/add")
+    public String addMember(
             @RequestParam("username") String username,
             @RequestParam("latitude") double lat,
             @RequestParam("longitude") double lon,
@@ -49,7 +56,26 @@ public class MemberController {
         memberService.join(member); // TODO : Save process
         
         model.addAttribute("member", member);
-        return "save-result";
+        return "basic/member";
+    }
+
+    @GetMapping("/{memberId}/edit")
+    public String editForm(@PathVariable Long memberId, Model model){
+        Member member = memberService.findMemberById(memberId);
+        model.addAttribute("member", member);
+        return "basic/memberEditForm";
+    }
+
+    @PostMapping("/{memberId}/edit")
+    public String editMember(
+            @PathVariable Long memberId,
+            @RequestParam("username") String username,
+            @RequestParam("latitude") double lat,
+            @RequestParam("longitude") double lon,
+            Model model){
+        Member member = new Member(username, new Location(lat, lon));
+        memberService.editMember(memberId, member);
+        return "redirect:/gggb/members/{memberId}";
     }
 
     /*테스트용데이터, 이후 삭제*/

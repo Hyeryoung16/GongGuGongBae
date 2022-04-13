@@ -27,6 +27,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public void editMember(Long memberId, Member member) {
+        memberRepository.update(memberId, member);
+    }
+
+    @Override
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
     }

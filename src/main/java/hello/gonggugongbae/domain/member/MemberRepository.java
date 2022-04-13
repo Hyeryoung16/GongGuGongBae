@@ -6,5 +6,6 @@ public interface MemberRepository {
     Member save(Member member); // 저장
     Member findById(Long memberId); // 조회
     List<Member> findAll(); // 전체 조회
+    void update(Long memberId, Member member); // 수정
     void clearStore();
 }

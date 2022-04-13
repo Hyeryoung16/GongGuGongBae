@@ -1,5 +1,6 @@
 package hello.gonggugongbae.domain.member;
 
+import hello.gonggugongbae.domain.location.Location;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -28,6 +29,13 @@ public class MemberRepositoryMemory implements MemberRepository{
     @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void update(Long memberId, Member member) {
+        Member findMember = store.get(memberId);
+        findMember.setUsername(member.getUsername());
+        findMember.setAddress(member.getAddress());
     }
 
     @Override

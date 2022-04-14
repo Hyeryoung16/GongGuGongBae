@@ -15,19 +15,19 @@ import java.util.List;
 public class Member {
     private Long id;
 
-    @NotEmpty
+    //@NotEmpty
     private String loginId; // 로그인 아이디
-    @NotEmpty
+    //@NotEmpty
     private String username; // 사용자 이름
-    @NotEmpty
+    //@NotEmpty
     private String password; // 로그인 비밀번호
-    @NotNull
-    private double latitude; // 주소-위도
-    @NotNull
-    private double longitude; // 주소-경도
+    //@NotNull
+    private Double latitude; // 주소-위도
+    //@NotNull
+    private Double longitude; // 주소-경도
     private List<Long> parties = new ArrayList<>();
 
-    public Member(@NotEmpty String loginId, @NotEmpty String username, @NotEmpty String password, @NotEmpty double latitude, @NotEmpty double longitude) {
+    public Member(String loginId, String username, String password, Double latitude, Double longitude) {
         this.loginId = loginId;
         this.username = username;
         this.password = password;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -24,6 +25,11 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member findMemberById(Long memberId) {
         return memberRepository.findById(memberId);
+    }
+
+    @Override
+    public Optional<Member> findMemberByLoginId(String loginId){
+        return memberRepository.findByLoginId(loginId);
     }
 
     @Override

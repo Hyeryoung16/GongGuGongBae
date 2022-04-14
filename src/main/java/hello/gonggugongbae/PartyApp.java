@@ -16,7 +16,7 @@ public class PartyApp {
         PartyService partyService = applicationContext.getBean(PartyService.class);
         MemberService memberService = applicationContext.getBean(MemberService.class);
 
-        Member member = new Member("userB", new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON));
+        Member member = new Member("userB", "Kim", "1234", MyLocation.PARK_LAT, MyLocation.PARK_LON);
         memberService.join(member);
 
         Item item = new Item("itemA","www.itemlink.com", 8000, 2000);

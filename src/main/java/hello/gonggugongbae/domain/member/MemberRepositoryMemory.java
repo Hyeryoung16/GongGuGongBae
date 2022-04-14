@@ -1,12 +1,8 @@
 package hello.gonggugongbae.domain.member;
 
-import hello.gonggugongbae.domain.location.Location;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class MemberRepositoryMemory implements MemberRepository{
@@ -27,6 +23,11 @@ public class MemberRepositoryMemory implements MemberRepository{
     }
 
     @Override
+    public Optional<Member> findByLoginId(String loginId) {
+        return findAll().stream().filter(member -> member.getLoginId().equals(loginId)).findFirst();
+    }
+
+    @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
@@ -35,7 +36,9 @@ public class MemberRepositoryMemory implements MemberRepository{
     public void update(Long memberId, Member member) {
         Member findMember = store.get(memberId);
         findMember.setUsername(member.getUsername());
-        findMember.setAddress(member.getAddress());
+        findMember.setPassword(member.getPassword());
+        findMember.setLatitude(member.getLatitude());
+        findMember.setLongitude(member.getLongitude());
     }
 
     @Override

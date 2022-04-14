@@ -12,7 +12,7 @@ public class MemberApp {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
         MemberService memberService = applicationContext.getBean(MemberService.class);
 
-        Member member = new Member("userA", new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
+        Member member = new Member("userA", "kim", "1234", MyLocation.GYM_LAT, MyLocation.GYM_LON);
         memberService.join(member);
 
         Member findMember = memberService.findMemberById(member.getId());

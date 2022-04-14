@@ -29,6 +29,7 @@ public class PartyServiceImpl implements PartyService{
         this.partyRepository = partyRepository;
         this.locationPolicy = locationPolicy;
     }
+
     @Override
     public Party createParty(Party party) {
         Member host = memberRepository.findById(party.getMemberId()); // 팟 호스트

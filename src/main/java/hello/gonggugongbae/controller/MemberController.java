@@ -4,11 +4,15 @@ import hello.gonggugongbae.domain.location.Location;
 import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberService;
+import hello.gonggugongbae.validation.MemberValidator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,17 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 @Controller
 @RequestMapping("/members")
+@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService; // TODO : 방법 맞는지 체크
-
-    @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    private final MemberValidator memberValidator;
 
     @GetMapping // TODO : 전체 멤버조회는 이후 삭제
     public String members(Model model) {
@@ -64,44 +65,14 @@ public class MemberController {
     */
 
     @PostMapping("/add")
-    public String add(@ModelAttribute("member") Member member,
-                      RedirectAttributes redirectAttributes,
-                      Model model){
-        // 검증 오류를 보관
-        Map<String, String> errors = new HashMap<>();
+    public String addMember(@ModelAttribute("member") Member member,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes){
 
-        //검증로직1 : 로그인 아이디 필수
-        if(!StringUtils.hasText(member.getLoginId())) {
-            errors.put("loginId", "로그인 아이디는 필수 입니다");
-        }
-
-        //검증로직2 : 사용자 이름 필수
-        if(!StringUtils.hasText(member.getUsername())) {
-            errors.put("username", "사용자 이름은 필수 입니다");
-        }
-
-        //검증로직3 : 비밀번호 필수
-        if(!StringUtils.hasText(member.getPassword())) {
-            errors.put("password", "비밀번호는 필수 입니다");
-        }
-
-        //검증로직4 : 위도 필수 & 범위는 -90~90 까지 허용
-        if(member.getLatitude() == null
-                || member.getLatitude() < -90
-                || member.getLatitude() > 90) {
-            errors.put("latitude", "위도는 -90에서 +90까지 허용합니다");
-        }
-
-        //검증로직5 : 경도 필수 & 범위는 -180~180 까지 허용
-        if(member.getLongitude() == null
-                || member.getLongitude() < -180
-                || member.getLongitude() > 180) {
-            errors.put("longitude", "경도는 -180에서 +180까지 허용합니다");
-        }
+        memberValidator.validate(member, bindingResult);
 
         //검증 실패 시, 다시 회원가입 폼으로
-        if (!errors.isEmpty()) {
-            model.addAttribute("errors", errors);
+        if (bindingResult.hasErrors()) {
             return "member/memberAddForm";
         }
 

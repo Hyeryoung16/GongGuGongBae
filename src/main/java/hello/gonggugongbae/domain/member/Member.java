@@ -1,6 +1,7 @@
 package hello.gonggugongbae.domain.member;
 
 import hello.gonggugongbae.domain.location.Location;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Getter
-@Setter
+@Data
 public class Member {
     private Long id;
 
@@ -26,6 +26,8 @@ public class Member {
     //@NotNull
     private Double longitude; // 주소-경도
     private List<Long> parties = new ArrayList<>();
+
+    public Member(){}
 
     public Member(String loginId, String username, String password, Double latitude, Double longitude) {
         this.loginId = loginId;

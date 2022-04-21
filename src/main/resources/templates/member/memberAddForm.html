@@ -27,37 +27,37 @@
 
         <div>
             <label for="loginId">아이디</label>
-            <input type="text" id="loginId" th:field="*{loginId}" th:class="${errors?.containsKey('loginId')} ? 'form-control field-error' : 'form-control'"
+            <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error"
                    name="loginId" class="form-control" placeholder="아이디를 입력하세요">
-            <div class="field-error" th:if="${errors?.containsKey('loginId')}" th:text="${errors['loginId']}"> 아이디 오류</div>
+            <div class="field-error" th:errors="*{loginId}"> 아이디 오류</div>
         </div>
 
         <div>
             <label for="username">회원명</label>
-            <input type="text" id="username" th:field="*{username}" th:class="${errors?.containsKey('username')} ? 'form-control field-error' : 'form-control'"
+            <input type="text" id="username" th:field="*{username}" th:errorclass="field-error"
                    name="username" class="form-control" placeholder="회원이름을 입력하세요">
-            <div class="field-error" th:if="${errors?.containsKey('username')}" th:text="${errors['username']}"> 회원명 오류</div>
+            <div class="field-error" th:errors="*{username}"> 회원명 오류</div>
         </div>
 
         <div>
             <label for="password">비밀번호</label>
-            <input type="text" id="password" th:field="*{password}" th:class="${errors?.containsKey('password')} ? 'form-control field-error' : 'form-control'"
+            <input type="text" id="password" th:field="*{password}" th:errorclass="field-error"
                    name="password" class="form-control" placeholder="비밀번호를 입력하세요">
-            <div class="field-error" th:if="${errors?.containsKey('password')}" th:text="${errors['password']}"> 아이디 오류</div>
+            <div class="field-error" th:errors="*{password}"> 비밀번호 오류</div>
         </div>
 
         <div>
             <label for="latitude">위도</label>
-            <input type="text" id="latitude" th:field="*{latitude}" th:class="${errors?.containsKey('latitude')} ? 'form-control field-error' : 'form-control'"
+            <input type="text" id="latitude" th:field="*{latitude}" th:errorclass="field-error"
                    name="latitude" class="form-control" placeholder="주소(위도)를 입력하세요">
-            <div class="field-error" th:if="${errors?.containsKey('latitude')}" th:text="${errors['latitude']}"> 아이디 오류</div>
+            <div class="field-error" th:errors="*{latitude}"> 위도 오류</div>
         </div>
 
         <div>
             <label for="longitude">경도</label>
-            <input type="text" id="longitude" th:field="*{longitude}" th:class="${errors?.containsKey('longitude')} ? 'form-control field-error' : 'form-control'"
+            <input type="text" id="longitude" th:field="*{longitude}" th:errorclass="field-error"
                    name="longitude" class="form-control" placeholder="주소(경도)를 입력하세요">
-            <div class="field-error" th:if="${errors?.containsKey('longitude')}" th:text="${errors['longitude']}"> 아이디 오류</div>
+            <div class="field-error" th:errors="*{longitude}"> 경도 오류</div>
         </div>
 
         <hr class="my-4">

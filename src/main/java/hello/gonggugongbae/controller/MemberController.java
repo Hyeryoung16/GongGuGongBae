@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -64,12 +66,16 @@ public class MemberController {
     }
     */
 
+    @InitBinder
+    public void init(WebDataBinder dataBinder) {
+        log.info("init binder {}", dataBinder);
+        dataBinder.addValidators(memberValidator);
+    }
+
     @PostMapping("/add")
-    public String addMember(@ModelAttribute("member") Member member,
+    public String addMember(@Validated @ModelAttribute("member") Member member,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes){
-
-        memberValidator.validate(member, bindingResult);
 
         //검증 실패 시, 다시 회원가입 폼으로
         if (bindingResult.hasErrors()) {

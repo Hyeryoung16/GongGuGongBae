@@ -57,9 +57,7 @@ public class MemberController {
     public String addMember(@Validated @ModelAttribute("member") Member member,
                             BindingResult result) {
 
-        /*
-        특정 필드 예외가 아닌 전체 예외 (Object Error)
-         */
+        /* 특정 필드 예외가 아닌 전체 예외 (Object Error) */
 
         if (result.hasErrors()) {
             return "member/memberAddForm";
@@ -78,7 +76,16 @@ public class MemberController {
     }
 
     @PostMapping("/{memberId}/edit")
-    public String editMember(@PathVariable Long memberId, @ModelAttribute("member") Member member){
+    public String editMember(@PathVariable Long memberId,
+                             @Validated @ModelAttribute("member") Member member,
+                             BindingResult result){
+
+        /* 특정 필드 예외가 아닌 전체 예외 (Object Error) */
+
+        if (result.hasErrors()) {
+            return "member/memberEditForm";
+        }
+
         memberService.editMember(memberId, member);
         return "redirect:/members/{memberId}";
     }

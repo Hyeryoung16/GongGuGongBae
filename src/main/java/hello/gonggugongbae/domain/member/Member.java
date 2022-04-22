@@ -15,19 +15,12 @@ import java.util.List;
 
 @Data
 public class Member {
-    private Long id;
 
-    @NotBlank
+    private Long id;
     private String loginId; // 로그인 아이디
-    @NotBlank
     private String username; // 사용자 이름
-    @NotBlank
     private String password; // 로그인 비밀번호
-    @NotNull
-    @Range(min=-90, max=90)
     private Double latitude; // 주소-위도
-    @NotNull
-    @Range(min=-180, max=180)
     private Double longitude; // 주소-경도
     private List<Long> parties = new ArrayList<>();
 

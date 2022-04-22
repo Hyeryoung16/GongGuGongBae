@@ -3,6 +3,8 @@ package hello.gonggugongbae.controller;
 import hello.gonggugongbae.domain.location.Location;
 import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
+import hello.gonggugongbae.domain.member.MemberEditForm;
+import hello.gonggugongbae.domain.member.MemberJoinForm;
 import hello.gonggugongbae.domain.member.MemberService;
 import hello.gonggugongbae.validation.MemberValidator;
 import lombok.RequiredArgsConstructor;
@@ -54,17 +56,18 @@ public class MemberController {
 
 
     @PostMapping("/add")
-    public String addMember(@Validated @ModelAttribute("member") Member member,
+    public String addMember(@Validated @ModelAttribute("member") MemberJoinForm form,
                             BindingResult result) {
 
-        /* 특정 필드 예외가 아닌 전체 예외 (Object Error) */
+        // 특정 필드 예외가 아닌 전체 예외 (Object Error)
 
         if (result.hasErrors()) {
             return "member/memberAddForm";
         }
 
+        // 성공로직
+        Member member = new Member(form.getLoginId(), form.getUsername(), form.getPassword(), form.getLatitude(), form.getLongitude());
         memberService.join(member); // TODO : Save process
-        // model.addAttribute("member", member); // @ModelAttribute 에 의해 자동추가 됨
         return "redirect:/";
     }
 
@@ -77,15 +80,17 @@ public class MemberController {
 
     @PostMapping("/{memberId}/edit")
     public String editMember(@PathVariable Long memberId,
-                             @Validated @ModelAttribute("member") Member member,
+                             @Validated @ModelAttribute("member") MemberEditForm form,
                              BindingResult result){
 
-        /* 특정 필드 예외가 아닌 전체 예외 (Object Error) */
+        // 특정 필드 예외가 아닌 전체 예외 (Object Error)
 
         if (result.hasErrors()) {
             return "member/memberEditForm";
         }
 
+        // 성공로직
+        Member member = new Member(form.getLoginId(), form.getUsername(), form.getPassword(), form.getLatitude(), form.getLongitude());
         memberService.editMember(memberId, member);
         return "redirect:/members/{memberId}";
     }

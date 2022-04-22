@@ -31,7 +31,7 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService; // TODO : 방법 맞는지 체크
-    private final MemberValidator memberValidator;
+    //private final MemberValidator memberValidator;
 
     @GetMapping // TODO : 전체 멤버조회는 이후 삭제
     public String members(Model model) {
@@ -52,9 +52,14 @@ public class MemberController {
         return "member/memberAddForm";
     }
 
-    /*
+
     @PostMapping("/add")
-    public String addMember(@Valid @ModelAttribute("member") Member member, BindingResult result) {
+    public String addMember(@Validated @ModelAttribute("member") Member member,
+                            BindingResult result) {
+
+        /*
+        특정 필드 예외가 아닌 전체 예외 (Object Error)
+         */
 
         if (result.hasErrors()) {
             return "member/memberAddForm";
@@ -62,28 +67,6 @@ public class MemberController {
 
         memberService.join(member); // TODO : Save process
         // model.addAttribute("member", member); // @ModelAttribute 에 의해 자동추가 됨
-        return "redirect:/";
-    }
-    */
-
-    @InitBinder
-    public void init(WebDataBinder dataBinder) {
-        log.info("init binder {}", dataBinder);
-        dataBinder.addValidators(memberValidator);
-    }
-
-    @PostMapping("/add")
-    public String addMember(@Validated @ModelAttribute("member") Member member,
-                            BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes){
-
-        //검증 실패 시, 다시 회원가입 폼으로
-        if (bindingResult.hasErrors()) {
-            return "member/memberAddForm";
-        }
-
-        //성공 로직
-        memberService.join(member);
         return "redirect:/";
     }
 

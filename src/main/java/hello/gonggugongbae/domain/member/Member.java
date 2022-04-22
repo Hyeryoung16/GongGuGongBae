@@ -4,7 +4,9 @@ import hello.gonggugongbae.domain.location.Location;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -15,15 +17,17 @@ import java.util.List;
 public class Member {
     private Long id;
 
-    //@NotEmpty
+    @NotBlank
     private String loginId; // 로그인 아이디
-    //@NotEmpty
+    @NotBlank
     private String username; // 사용자 이름
-    //@NotEmpty
+    @NotBlank
     private String password; // 로그인 비밀번호
-    //@NotNull
+    @NotNull
+    @Range(min=-90, max=90)
     private Double latitude; // 주소-위도
-    //@NotNull
+    @NotNull
+    @Range(min=-180, max=180)
     private Double longitude; // 주소-경도
     private List<Long> parties = new ArrayList<>();
 

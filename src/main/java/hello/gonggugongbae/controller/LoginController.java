@@ -3,6 +3,7 @@ package hello.gonggugongbae.controller;
 import hello.gonggugongbae.domain.login.LoginForm;
 import hello.gonggugongbae.domain.login.LoginService;
 import hello.gonggugongbae.domain.member.Member;
+import hello.gonggugongbae.session.SessionConst;
 import hello.gonggugongbae.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
     private final LoginService loginService;
-    private final SessionManager sessionManager;
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm loginForm){
@@ -32,7 +33,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute("loginForm") LoginForm loginForm,
                         BindingResult result,
-                        HttpServletResponse response){
+                        HttpServletRequest request){
 
         if(result.hasErrors()){
             return "login/loginForm";
@@ -47,13 +48,17 @@ public class LoginController {
         }
 
         // 로그인 성공 시
-        sessionManager.createSession(member, response); // 세션 생성 + 데이터 보관
+        HttpSession session = request.getSession(true); // 세션 있으면 세션 반환, 없으면 새로 생성
+        session.setAttribute(SessionConst.LOGIN_MEMBER, member); // 세션에 데이터 보관
         return "redirect:/";
     }
 
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
-        sessionManager.expire(request);
+        HttpSession session = request.getSession(false); // 세션 있으면 세션 반환, 없어도 새로 생성하지 않고 null 반환
+        if (session != null) {
+            session.invalidate(); // 세션 삭제
+        }
         return "redirect:/";
     }
 }

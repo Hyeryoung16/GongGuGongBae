@@ -11,6 +11,9 @@ import hello.gonggugongbae.domain.party.PartyRepository;
 import hello.gonggugongbae.domain.party.PartyRepositoryMemory;
 import hello.gonggugongbae.domain.party.PartyService;
 import hello.gonggugongbae.domain.party.PartyServiceImpl;
+import hello.gonggugongbae.session.SessionManager;
+import hello.gonggugongbae.session.SessionStore;
+import hello.gonggugongbae.session.SessionStoreMemory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

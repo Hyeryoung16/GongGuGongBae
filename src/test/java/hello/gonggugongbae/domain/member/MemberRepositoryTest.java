@@ -25,8 +25,7 @@ class MemberRepositoryTest {
     @DisplayName("memberRepository member 저장 테스트")
     void save(){
         // given
-        Location location = new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON);
-        Member member = new Member("memberA", location);
+        Member member = new Member("memberA", "usernameA", "pwdA", MyLocation.GYM_LAT, MyLocation.GYM_LON);
 
         // when
         Member savedMember = memberRepository.save(member);
@@ -40,10 +39,8 @@ class MemberRepositoryTest {
     @DisplayName("memberRepository 모든 member 찾기 테스트")
     void findAll(){
         // given
-        Location location1 = new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON);
-        Member member1 = new Member("memberA", location1);
-        Location location2 = new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON);
-        Member member2 = new Member("memberB", location2);
+        Member member1 = new Member("memberA", "usernameA", "pwdA", MyLocation.GYM_LAT, MyLocation.GYM_LON);
+        Member member2 = new Member("memberB", "usernameB", "pwdB", MyLocation.PARK_LAT, MyLocation.PARK_LON);
 
         memberRepository.save(member1);
         memberRepository.save(member2);

@@ -1,32 +1,30 @@
 package hello.gonggugongbae.domain.party;
 
-import hello.gonggugongbae.AppConfig;
+import hello.gonggugongbae.config.AutoAppConfig;
 import hello.gonggugongbae.domain.item.Item;
 import hello.gonggugongbae.domain.location.Location;
 import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberService;
-import hello.gonggugongbae.domain.member.MemberServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PartyServiceImplTest {
 
     MemberService memberService;
     PartyService partyService;
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
 
     @BeforeEach
     public void beforeEach(){
-        AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-        partyService = appConfig.partyService();
+        memberService = ac.getBean(MemberService.class);
+        partyService = ac.getBean(PartyService.class);
     }
 
     @Test

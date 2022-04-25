@@ -1,6 +1,6 @@
-package hello.gonggugongbae;
+package hello.gonggugongbae.app;
 
-import hello.gonggugongbae.domain.location.Location;
+import hello.gonggugongbae.config.AutoAppConfig;
 import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberService;

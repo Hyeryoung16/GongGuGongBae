@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LoginCheckFilter implements Filter {
 
     private static final String[] whiteList = {"/", "/members/add", "/login",
-            "/logout","/css/*", "/favicon.ico"}; // 필터를 적용하지 않을 URL
+            "/logout","/css/*", "/*.ico"}; // 필터를 적용하지 않을 URL
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

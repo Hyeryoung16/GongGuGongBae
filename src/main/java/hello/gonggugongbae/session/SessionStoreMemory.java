@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
+//@Repository
 public class SessionStoreMemory implements SessionStore{
 
     private Map<String, Object> sessionStore = new ConcurrentHashMap<>(); // 동시 요청에 안전

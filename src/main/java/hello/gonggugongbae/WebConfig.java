@@ -1,4 +1,4 @@
-package hello.gonggugongbae.config;
+package hello.gonggugongbae;
 
 import hello.gonggugongbae.argumentresolver.LoginMemberArgumentResolver;
 import hello.gonggugongbae.filter.LogFilter;
@@ -33,7 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(2)
                 .addPathPatterns("/**")
                 .excludePathPatterns(
-                        "/", "/members/add", "/login",
+                        "/", "/signup", "/login",
                         "/logout","/css/*", "/*.ico", "/error"
                 );
     }

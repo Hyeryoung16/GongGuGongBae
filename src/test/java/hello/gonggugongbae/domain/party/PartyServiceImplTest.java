@@ -1,11 +1,12 @@
 package hello.gonggugongbae.domain.party;
 
-import hello.gonggugongbae.config.AutoAppConfig;
+import hello.gonggugongbae.AutoAppConfig;
 import hello.gonggugongbae.domain.item.Item;
 import hello.gonggugongbae.domain.location.Location;
 import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberService;
+import hello.gonggugongbae.domain.member.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,8 @@ class PartyServiceImplTest {
 
     @BeforeEach
     public void beforeEach(){
-        memberService = ac.getBean(MemberService.class);
-        partyService = ac.getBean(PartyService.class);
+        memberService = ac.getBean(MemberServiceImpl.class);
+        partyService = ac.getBean(PartyServiceImpl.class);
     }
 
     @Test

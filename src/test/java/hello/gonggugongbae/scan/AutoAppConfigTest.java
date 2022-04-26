@@ -1,6 +1,6 @@
 package hello.gonggugongbae.scan;
 
-import hello.gonggugongbae.config.AutoAppConfig;
+import hello.gonggugongbae.AutoAppConfig;
 import hello.gonggugongbae.domain.member.MemberService;
 import hello.gonggugongbae.domain.party.PartyService;
 import org.assertj.core.api.Assertions;

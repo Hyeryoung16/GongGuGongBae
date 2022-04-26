@@ -17,10 +17,16 @@
     <hr class="my-4">
 
     <div class="row">
+        <h3> 이곳은 팟이 표시될 공간입니다 </h3>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
 
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg" type="button"
-                    th:onclick="|location.href='@{/members/{memberId}(memberId=${member.id})}'|">
+                    th:onclick="|location.href='@{/member}'|">
                 회원 정보
             </button>
         </div>

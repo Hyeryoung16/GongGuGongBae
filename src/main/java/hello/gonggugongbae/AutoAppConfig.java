@@ -1,4 +1,4 @@
-package hello.gonggugongbae.config;
+package hello.gonggugongbae;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

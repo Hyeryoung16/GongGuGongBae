@@ -1,18 +1,26 @@
 package hello.gonggugongbae.config;
 
+import hello.gonggugongbae.argumentresolver.LoginMemberArgumentResolver;
 import hello.gonggugongbae.filter.LogFilter;
 import hello.gonggugongbae.filter.LoginCheckFilter;
 import hello.gonggugongbae.interceptor.LogInterceptor;
 import hello.gonggugongbae.interceptor.LoginCheckInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.Filter;
+import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(new LoginMemberArgumentResolver());
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

@@ -1,5 +1,6 @@
 package hello.gonggugongbae.controller;
 
+import hello.gonggugongbae.argumentresolver.Login;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeLogin(
-            @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member member,
+            @Login Member member,
             Model model) {
 
         if (member == null) { return "home"; }

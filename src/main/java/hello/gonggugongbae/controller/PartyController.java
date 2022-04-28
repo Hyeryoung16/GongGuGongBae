@@ -1,0 +1,74 @@
+package hello.gonggugongbae.controller;
+
+import hello.gonggugongbae.argumentresolver.Login;
+import hello.gonggugongbae.domain.member.Member;
+import hello.gonggugongbae.domain.party.Party;
+import hello.gonggugongbae.domain.party.PartyCreateForm;
+import hello.gonggugongbae.domain.party.PartyService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+@Slf4j
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/party")
+public class PartyController {
+
+    private final PartyService partyService;
+
+    @GetMapping("/show")
+    public String showParties(Model model) {
+        List<Party> parties = partyService.findAllParties();
+        model.addAttribute("parties", parties);
+        return "party/parties";
+    }
+
+
+    @GetMapping("/add")
+    public String addPartyForm(@ModelAttribute Party party){
+        return "party/partyAddForm";
+    }
+
+    @PostMapping("/add")
+    public String addParty(@Login Member member,
+                           @Validated @ModelAttribute("party") PartyCreateForm form,
+                           BindingResult result){
+
+        if (result.hasErrors()) {
+            List<FieldError> fieldErrors = result.getFieldErrors();
+            for (FieldError fieldError : fieldErrors) {
+                log.info("fieldError = " + fieldError);
+            }
+            return "party/partyAddForm";
+        }
+
+        // 성공로직
+        Party party = new Party(member.getId(), form.getItem(), form.getPartyMemberNum(), form.getDuration(), form.getMinOrderPricePerMember(), form.getReceiveLocation());
+
+        Party createdParty = partyService.createParty(party);
+        if (createdParty == null) { // 위치 정책상의 실패일 때
+            result.rejectValue("Location", "tooFar");
+            List<FieldError> fieldErrors = result.getFieldErrors();
+            for (FieldError fieldError : fieldErrors) {
+                if ( fieldError.getField() == "Location") {
+                    log.info("fieldError = " + fieldError);
+                }
+            }
+            return "party/partyAddForm";
+        }
+
+        log.info("Party Created Success!! ", createdParty.toString());
+        return "redirect:/";
+    }
+}

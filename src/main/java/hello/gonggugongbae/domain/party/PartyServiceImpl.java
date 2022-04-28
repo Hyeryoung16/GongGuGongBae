@@ -15,10 +15,6 @@ import java.util.List;
 @Component
 public class PartyServiceImpl implements PartyService{
 
-    // private final MemberRepository memberRepository = new MemberRepositoryMemory(); // 멤버 저장소
-    // private final PartyRepository partyRepository = new PartyRepositoryMemory(); // 파티 저장소
-    // private final LocationPolicy locationPolicy = new LocationPolicyImpl(); // 위치 정책
-
     private final MemberRepository memberRepository;
     private final PartyRepository partyRepository;
     private final LocationPolicy locationPolicy;
@@ -72,5 +68,11 @@ public class PartyServiceImpl implements PartyService{
         else {
             return false; // TODO : 삭제 실패 했을 때 에러 처리
         }
+    }
+
+    /*Temp*/
+    @Override
+    public List<Party> findAllParties(){
+        return partyRepository.findAll();
     }
 }

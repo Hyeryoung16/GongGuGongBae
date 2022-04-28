@@ -1,27 +1,37 @@
 package hello.gonggugongbae.domain.location;
 
-public class Location {
-    double latitude; // 위도
-    double longitude; // 경도
+import org.hibernate.validator.constraints.Range;
 
-    public Location(double latitude, double longitude) {
+import javax.validation.constraints.NotNull;
+
+public class Location {
+    @NotNull
+    @Range(min=-90, max=90)
+    Double latitude; // 위도
+    @NotNull
+    @Range(min=-180, max=180)
+    Double longitude; // 경도
+
+    public Location() {}
+
+    public Location(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 }

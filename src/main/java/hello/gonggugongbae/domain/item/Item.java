@@ -1,16 +1,28 @@
 package hello.gonggugongbae.domain.item;
 
-public class Item {
-    private String itemName; // 구매처
-    private String refLink; // 참고링크
-    private int minOrderPrice; // 최소주문금액
-    private int deliveryPrice; // 배송(배달)비
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-    public Item(String itemName, String refLink, int minOrderPrice, int deliveryPrice) {
+public class Item {
+    @NotBlank
+    private String itemName; // 상품이름(구매처)
+    @NotBlank
+    private String itemRefLink; // 참고링크
+    @NotNull
+    @Min(0)
+    private Integer itemMinOrderPrice; // 최소주문금액
+    @NotNull
+    @Min(0)
+    private Integer itemDeliveryPrice; // 배송(배달)비
+
+    public Item() {}
+
+    public Item(String itemName, String itemRefLink, Integer itemMinOrderPrice, Integer itemDeliveryPrice) {
         this.itemName = itemName;
-        this.refLink = refLink;
-        this.minOrderPrice = minOrderPrice;
-        this.deliveryPrice = deliveryPrice;
+        this.itemRefLink = itemRefLink;
+        this.itemMinOrderPrice = itemMinOrderPrice;
+        this.itemDeliveryPrice = itemDeliveryPrice;
     }
 
     public String getItemName() {
@@ -21,27 +33,27 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public String getRefLink() {
-        return refLink;
+    public String getItemRefLink() {
+        return itemRefLink;
     }
 
-    public void setRefLink(String refLink) {
-        this.refLink = refLink;
+    public void setItemRefLink(String itemRefLink) {
+        this.itemRefLink = itemRefLink;
     }
 
-    public int getMinOrderPrice() {
-        return minOrderPrice;
+    public Integer getItemMinOrderPrice() {
+        return itemMinOrderPrice;
     }
 
-    public void setMinOrderPrice(int minOrderPrice) {
-        this.minOrderPrice = minOrderPrice;
+    public void setItemMinOrderPrice(Integer itemMinOrderPrice) {
+        this.itemMinOrderPrice = itemMinOrderPrice;
     }
 
-    public int getDeliveryPrice() {
-        return deliveryPrice;
+    public Integer getItemDeliveryPrice() {
+        return itemDeliveryPrice;
     }
 
-    public void setDeliveryPrice(int deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
+    public void setItemDeliveryPrice(Integer itemDeliveryPrice) {
+        this.itemDeliveryPrice = itemDeliveryPrice;
     }
 }

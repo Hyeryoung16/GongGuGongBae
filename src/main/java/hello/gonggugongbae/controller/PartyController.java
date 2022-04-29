@@ -27,13 +27,18 @@ public class PartyController {
 
     private final PartyService partyService;
 
-    @GetMapping("/show")
+    @GetMapping("/show") // TODO : Temp
     public String showParties(Model model) {
         List<Party> parties = partyService.findAllParties();
         model.addAttribute("parties", parties);
-        return "party/parties";
+        return "party/allParties";
     }
 
+    @GetMapping("/")
+    public String myParties(){
+
+        return "party/parties";
+    }
 
     @GetMapping("/add")
     public String addPartyForm(@ModelAttribute Party party){
@@ -58,13 +63,7 @@ public class PartyController {
 
         Party createdParty = partyService.createParty(party);
         if (createdParty == null) { // 위치 정책상의 실패일 때
-            result.rejectValue("Location", "tooFar");
-            List<FieldError> fieldErrors = result.getFieldErrors();
-            for (FieldError fieldError : fieldErrors) {
-                if ( fieldError.getField() == "Location") {
-                    log.info("fieldError = " + fieldError);
-                }
-            }
+            result.reject("LocationRange", new Object[]{member.getLatitude(), member.getLongitude()}, null );
             return "party/partyAddForm";
         }
 

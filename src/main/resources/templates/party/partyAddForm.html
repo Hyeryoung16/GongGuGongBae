@@ -74,6 +74,11 @@
             <div class="field-error" th:errors="*{minOrderPricePerMember}"> 인당 최소 주문 금액 오류</div>
         </div>
 
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+               th:text="${err}">글로벌 오류 메시지</p>
+        </div>
+
         <div>
             <label for="receiveLocation.latitude">수령장소 - 위도</label>
             <input type="text" id="receiveLocation.latitude" th:field="*{receiveLocation.latitude}" th:errorclass="field-error"

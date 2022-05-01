@@ -47,6 +47,14 @@ public class PartyServiceImpl implements PartyService{
     }
 
     @Override
+    public List<Party> findPartyByMemberId(Long memberId){
+        List<Party> parties = new ArrayList<>();
+        Member member = memberRepository.findById(memberId);
+        member.getParties().forEach(partyId -> parties.add(partyRepository.findById(partyId)));
+        return parties;
+    }
+
+    @Override
     public List<Party> findPartyAroundMember(Long memberId) {
         Member member = memberRepository.findById(memberId);
         List<Party> parties = partyRepository.findAll();

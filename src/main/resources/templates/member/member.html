@@ -6,14 +6,14 @@
           href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
     .container {
-        max-width: 560px;
+        max-width: 800px;
     }
     </style>
 </head>
 <body>
 <div class="container">
 
-    <aside class="member-menu">
+    <nav class="navbar member-menu">
         <ul>
             <li><button class="w-100 btn btn-primary btn-lg"
                         th:onclick="|location.href='@{/member}'|"
@@ -22,56 +22,57 @@
                         th:onclick="|location.href='@{/member/parties}'|"
                         type="button">내 참가 팟</button></li>
         </ul>
-    </aside>
-
-    <div class="py-5 text-center">
-        <h2>회원</h2>
-    </div>
+    </nav>
 
     <div>
-        <label for="memberId">ID</label>
-        <input type="text" id="memberId" name="memberId" class="form-control" th:value="${member.id}" readonly>
-    </div>
-
-    <div>
-        <label for="loginId">아이디</label>
-        <input type="text" id="loginID" name="loginId" class="form-control" th:value="${member.loginId}" readonly>
-    </div>
-
-    <div>
-        <label for="username">회원명</label>
-        <input type="text" id="username" name="username" class="form-control" th:value="${member.username}" readonly>
-    </div>
-
-    <div>
-        <label for="latitude">위도</label>
-        <input type="text" id="latitude" name="latitude" class="form-control" th:value="${member.address.latitude}" readonly>
-    </div>
-
-    <div>
-        <label for="longitude">경도</label>
-        <input type="text" id="longitude" name="longitude" class="form-control" th:value="${member.address.longitude}" readonly>
-    </div>
-
-    <div>
-        <label for="parties">팟</label>
-        <input type="text" id="parties" name="parties" class="form-control" th:value="${#lists.size(member.parties)}" readonly>
-    </div>
-
-    <hr class="my-4">
-    <div class="row">
-        <div class="col">
-            <button class="w-100 btn btn-primary btn-lg"
-                    th:onclick="|location.href='@{/member/edit}'|"
-                    type="button">회원정보수정</button>
+        <div class="py-5 text-center">
+            <h2>회원정보</h2>
         </div>
-        <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg"
-                    th:onclick="|location.href='@{/}'|"
-                    type="button">홈으로</button>
+
+        <div>
+            <label for="memberId">ID</label>
+            <input type="text" id="memberId" name="memberId" class="form-control" th:value="${member.id}" readonly>
+        </div>
+
+        <div>
+            <label for="loginId">아이디</label>
+            <input type="text" id="loginID" name="loginId" class="form-control" th:value="${member.loginId}" readonly>
+        </div>
+
+        <div>
+            <label for="username">회원명</label>
+            <input type="text" id="username" name="username" class="form-control" th:value="${member.username}" readonly>
+        </div>
+
+        <div>
+            <label for="latitude">위도</label>
+            <input type="text" id="latitude" name="latitude" class="form-control" th:value="${member.address.latitude}" readonly>
+        </div>
+
+        <div>
+            <label for="longitude">경도</label>
+            <input type="text" id="longitude" name="longitude" class="form-control" th:value="${member.address.longitude}" readonly>
+        </div>
+
+        <div>
+            <label for="parties">팟</label>
+            <input type="text" id="parties" name="parties" class="form-control" th:value="${#lists.size(member.parties)}" readonly>
+        </div>
+
+        <hr class="my-4">
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        th:onclick="|location.href='@{/member/edit}'|"
+                        type="button">회원정보수정</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{/}'|"
+                        type="button">홈으로</button>
+            </div>
         </div>
     </div>
-
 </div> <!-- /container -->
 </body>
 </html>

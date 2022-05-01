@@ -54,8 +54,11 @@ public class MemberController {
     /* TODO : 테스트용데이터, 이후 삭제 */
     @PostConstruct
     public void init(){
-        Location location = new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON);
-        Member member = new Member("hgd1234", "hong-gil-dong", "pwd1234", MyLocation.GYM_LAT, MyLocation.GYM_LON);
-        memberService.join(member);
+        Member member1 = new Member("id1", "KIM", "1234", MyLocation.GYM_LAT, MyLocation.GYM_LON);
+        Member member2 = new Member("id2", "HONG", "1234", MyLocation.PARK_LAT, MyLocation.PARK_LON);
+        Member member3 = new Member("id3", "HONG", "1234", MyLocation.STATION_LAT, MyLocation.STATION_LON);
+        memberService.join(member1);
+        memberService.join(member2);
+        memberService.join(member3);
     }
 }

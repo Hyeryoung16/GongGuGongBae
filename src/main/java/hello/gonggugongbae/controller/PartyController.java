@@ -1,6 +1,9 @@
 package hello.gonggugongbae.controller;
 
 import hello.gonggugongbae.argumentresolver.Login;
+import hello.gonggugongbae.domain.item.Item;
+import hello.gonggugongbae.domain.location.Location;
+import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.party.Party;
 import hello.gonggugongbae.domain.party.PartyCreateForm;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Slf4j
@@ -69,5 +73,20 @@ public class PartyController {
 
         log.info("Party Created Success!! ", createdParty.toString());
         return "redirect:/";
+    }
+
+    @PostConstruct void init(){
+        Item item1 = new Item("배민-엽떡", "www.hello.com", 8000, 3000);
+        Party party1 = new Party(1L, item1, 3, 30, 3000, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
+
+        Item item2 = new Item("11번가-휴지", "www.world.com", 0, 2500);
+        Party party2 = new Party(1L, item2, 3, 240, 0, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
+
+        Item item3 = new Item("요기요-마라탕", "www.gg-gb.com", 9000, 4000);
+        Party party3 = new Party(2L, item3, 4, 60, 3500, new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON));
+
+        partyService.createParty(party1);
+        partyService.createParty(party2);
+        partyService.createParty(party3);
     }
 }

@@ -13,6 +13,17 @@
 <body>
 <div class="container">
 
+    <aside class="member-menu">
+        <ul>
+            <li><button class="w-100 btn btn-primary btn-lg"
+                        th:onclick="|location.href='@{/member}'|"
+                        type="button">회원 정보</button></li>
+            <li><button class="w-100 btn btn-primary btn-lg"
+                        th:onclick="|location.href='@{/member/parties}'|"
+                        type="button">내 참가 팟</button></li>
+        </ul>
+    </aside>
+
     <div class="py-5 text-center">
         <h2>회원</h2>
     </div>

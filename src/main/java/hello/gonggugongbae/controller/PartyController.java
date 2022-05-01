@@ -80,7 +80,7 @@ public class PartyController {
         Party party1 = new Party(1L, item1, 3, 30, 3000, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
 
         Item item2 = new Item("11번가-휴지", "www.world.com", 0, 2500);
-        Party party2 = new Party(1L, item2, 3, 240, 0, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
+        Party party2 = new Party(1L, item2, 2, 240, 0, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
 
         Item item3 = new Item("요기요-마라탕", "www.gg-gb.com", 9000, 4000);
         Party party3 = new Party(2L, item3, 4, 60, 3500, new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON));

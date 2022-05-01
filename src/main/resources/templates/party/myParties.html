@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 800px">
+
+    <div class="py-5 text-center">
+        <h2>팟 목록</h2>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Host</th>
+                <th>상품</th>
+                <th>팟인원</th>
+                <th>팟모집기간</th>
+                <th>인당최소주문금액</th>
+                <th>수령장소</th>
+                <th>팟참여멤버</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="party : ${myParties}">
+                <td th:text="${party.partyId}">ID</td>
+                <td th:text="${party.memberId}">10000</td>
+                <td>
+                    <li th:text="${party.item.itemName}" ></li>
+                    <li th:text="${party.item.itemRefLink}" ></li>
+                    <li th:text="${party.item.itemMinOrderPrice}" ></li>
+                    <li th:text="${party.item.itemDeliveryPrice}" ></li>
+                </td>
+                <td th:text="${party.partyMemberNum}">10000</td>
+                <td th:text="${party.duration}">10000</td>
+                <td th:text="${party.minOrderPricePerMember}">10000</td>
+                <td>
+                    <li th:text="${party.receiveLocation.latitude}"></li>
+                    <li th:text="${party.receiveLocation.longitude}"></li>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="member : ${party.partyMembers}" th:text="${member}"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+</body>
+</html>

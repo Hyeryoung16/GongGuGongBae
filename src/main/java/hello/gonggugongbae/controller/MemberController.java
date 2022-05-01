@@ -6,6 +6,8 @@ import hello.gonggugongbae.domain.location.MyLocation;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberEditForm;
 import hello.gonggugongbae.domain.member.MemberService;
+import hello.gonggugongbae.domain.party.Party;
+import hello.gonggugongbae.domain.party.PartyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -22,7 +25,8 @@ import javax.annotation.PostConstruct;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberService memberService; // TODO : 방법 맞는지 체크
+    private final MemberService memberService;
+    private final PartyService partyService;
 
     @GetMapping
     public String member(@Login Member member,
@@ -49,6 +53,13 @@ public class MemberController {
         Member editMember = new Member(form.getLoginId(), form.getUsername(), form.getPassword(), form.getLatitude(), form.getLongitude());
         memberService.editMember(member.getId(), editMember);
         return "redirect:/member";
+    }
+
+    @GetMapping("/parties")
+    public String myParties(@Login Member member, Model model){
+        List<Party> myParties = partyService.findPartyByMemberId(member.getId());
+        model.addAttribute("myParties", myParties);
+        return "party/myParties";
     }
 
     /* TODO : 테스트용데이터, 이후 삭제 */

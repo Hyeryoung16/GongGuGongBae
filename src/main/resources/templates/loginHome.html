@@ -22,7 +22,16 @@
     </div>
 
     <div class="row">
-        <h3> 이곳은 팟이 표시될 공간입니다 </h3>
+        <div th:each="party : ${parties}" class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${party.item.itemName}"></h5>
+                <p class="card-text"> 팟 정보들이 들어갈 공간입니다 </p>
+                <form th:action="@{/party/participate}" method="post">
+                    <button class="w-100 btn btn-dark btn-lg" type="submit" th:onclick="|location.href='@{/}'|"> 팟 참가 </button>
+                </form>
+                <a href="/" class="btn btn-primary">자세히</a>
+            </div>
+        </div>
     </div>
 
     <hr class="my-4">

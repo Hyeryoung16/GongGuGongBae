@@ -1,86 +1,110 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-    .container {
-        max-width: 800px;
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
     }
-    </style>
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <nav class="navbar member-menu">
-        <ul>
-            <li><button class="w-100 btn btn-primary btn-lg"
-                        th:onclick="|location.href='@{/member}'|"
-                        type="button">회원 정보</button></li>
-            <li><button class="w-100 btn btn-primary btn-lg"
-                        th:onclick="|location.href='@{/member/parties}'|"
-                        type="button">내 참가 팟</button></li>
-        </ul>
-    </nav>
-
-    <div>
-        <div class="py-5 text-center">
-            <h2>팟 목록</h2>
-        </div>
-
-        <hr class="my-4">
-        <div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Host</th>
-                    <th>상품</th>
-                    <th>팟인원</th>
-                    <th>팟모집기간</th>
-                    <th>인당최소주문금액</th>
-                    <th>수령장소</th>
-                    <th>팟참여멤버</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="party : ${myParties}">
-                    <td th:text="${party.partyId}">ID</td>
-                    <td th:text="${party.memberId}">10000</td>
-                    <td>
-                        <li th:text="${party.item.itemName}" ></li>
-                        <li th:text="${party.item.itemRefLink}" ></li>
-                        <li th:text="${party.item.itemMinOrderPrice}" ></li>
-                        <li th:text="${party.item.itemDeliveryPrice}" ></li>
-                    </td>
-                    <td th:text="${party.partyMemberNum}">10000</td>
-                    <td th:text="${party.duration}">10000</td>
-                    <td th:text="${party.minOrderPricePerMember}">10000</td>
-                    <td>
-                        <li th:text="${party.receiveLocation.latitude}"></li>
-                        <li th:text="${party.receiveLocation.longitude}"></li>
-                    </td>
-                    <td>
-                        <ul>
-                            <li th:each="member : ${party.partyMembers}" th:text="${member}"></li>
-                        </ul>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <hr class="my-4">
-        <div class="row">
-            <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
-                        th:onclick="|location.href='@{/}'|"
-                        type="button">홈으로</button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                </ul>
+                <form class="me-lg-3">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <form th:action="@{/logout}" method="post" class="text-end">
+                    <button class="btn btn-outline-light me-2" type="submit">Log out</button>
+                </form>
             </div>
         </div>
-    </div>
+    </nav>
+</header>
+<div class="container" style="padding: 100px 0;">
+    <main class="row">
+        <div class="col-3 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a th:href="@{/member}" class="nav-link text-white">
+                        Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/member/parties}" class="nav-link active">
+                        Parties
+                    </a>
+                </li>
+            </ul>
+            <hr>
+        </div>
+        <div class="col-9 text-center">
+            <div class="form-signin">
 
+                <h1 class="h3 mb-3 fw-normal">My Parties</h1>
+
+                <div class="row">
+                    <div th:each="party : ${myParties}" class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${party.item.itemName}"></h5>
+                            <p class="card-text">
+                            <ul>
+                                <li th:text="${party.partyId}">ID</li>
+                                <li th:text="${party.memberId}">10000</li>
+
+                                <li th:text="${party.item.itemName}" ></li>
+                                <li th:text="${party.item.itemRefLink}" ></li>
+                                <li th:text="${party.item.itemMinOrderPrice}" ></li>
+                                <li th:text="${party.item.itemDeliveryPrice}" ></li>
+
+                                <li th:text="${party.partyMemberNum}">10000</li>
+                                <li th:text="${party.duration}">10000</li>
+                                <li th:text="${party.minOrderPricePerMember}">10000</li>
+
+                                <li th:text="${party.receiveLocation.latitude}"></li>
+                                <li th:text="${party.receiveLocation.longitude}"></li>
+                            </ul>
+                            <ul>
+                                <li th:each="member : ${party.partyMembers}" th:text="${member}"></li>
+                            </ul>
+                            </p>
+                            <a href="/" class="btn btn-primary">자세히</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
 </div> <!-- /container -->
 </body>
+
 </html>

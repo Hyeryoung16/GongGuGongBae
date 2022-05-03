@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 src/main/resources/static/temp/
+src/main/resources/original/
 
 ### STS ###
 .apt_generated

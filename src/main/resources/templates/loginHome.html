@@ -3,19 +3,37 @@
 <head>
     <meta charset="utf-8">
     <title>Pumpkin Market</title>
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" style="max-width: 600px">
-    <div class="py-5 text-center">
-        <h2>호박마켓</h2>
-    </div>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <h4 class="mb-3" th:text="|로그인: ${member.username}|">로그인 사용자 이름</h4>
-
-    <hr class="my-4">
-
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                </ul>
+                <form class="me-lg-3">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <form th:action="@{/logout}" method="post" class="text-end">
+                    <button class="btn btn-outline-light me-2" type="submit">Log out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container" style="padding: 100px 0;">
     <div class="row">
         <button class="w-100 btn btn-secondary btn-lg" type="button"
                 th:onclick="|location.href='@{/party/add}'|">팟 모집</button>
@@ -34,28 +52,7 @@
         </div>
     </div>
 
-    <hr class="my-4">
-
-    <div class="row">
-
-        <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg" type="button"
-                    th:onclick="|location.href='@{/member}'|">
-                회원 정보
-            </button>
-        </div>
-
-        <div class="col">
-            <form th:action="@{/logout}" method="post">
-                <button class="w-100 btn btn-dark btn-lg" type="submit">
-                    로그아웃
-                </button>
-            </form>
-        </div>
-
-    </div>
-
-    <hr class="my-4">
 </div> <!-- /container -->
+
 </body>
 </html>

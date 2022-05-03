@@ -1,78 +1,126 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-    .container {
-        max-width: 800px;
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
     }
-    </style>
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <nav class="navbar member-menu">
-        <ul>
-            <li><button class="w-100 btn btn-primary btn-lg"
-                        th:onclick="|location.href='@{/member}'|"
-                        type="button">회원 정보</button></li>
-            <li><button class="w-100 btn btn-primary btn-lg"
-                        th:onclick="|location.href='@{/member/parties}'|"
-                        type="button">내 참가 팟</button></li>
-        </ul>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                </ul>
+                <form class="me-lg-3">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <form th:action="@{/logout}" method="post" class="text-end">
+                    <button class="btn btn-outline-light me-2" type="submit">Log out</button>
+                </form>
+            </div>
+        </div>
     </nav>
-
-    <div>
-        <div class="py-5 text-center">
-            <h2>회원정보</h2>
+</header>
+<div class="container" style="padding: 100px 0;">
+    <main class="row">
+        <div class="col-3 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a th:href="@{/member}" class="nav-link active">
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/member/parties}" class="nav-link text-white">
+                        Parties
+                    </a>
+                </li>
+            </ul>
+            <hr>
         </div>
+        <div class="col-9 text-center">
+            <div class="form-signin">
 
-        <div>
-            <label for="memberId">ID</label>
-            <input type="text" id="memberId" name="memberId" class="form-control" th:value="${member.id}" readonly>
-        </div>
+                <h1 class="h3 mb-3 fw-normal">Edit Profile</h1>
 
-        <div>
-            <label for="loginId">아이디</label>
-            <input type="text" id="loginID" name="loginId" class="form-control" th:value="${member.loginId}" readonly>
-        </div>
+                <div>
+                    <label for="memberId">ID</label>
+                    <input type="text" id="memberId" name="memberId" class="form-control" th:value="${member.id}" readonly>
+                </div>
 
-        <div>
-            <label for="username">회원명</label>
-            <input type="text" id="username" name="username" class="form-control" th:value="${member.username}" readonly>
-        </div>
+                <div>
+                    <label for="loginId">아이디</label>
+                    <input type="text" id="loginID" name="loginId" class="form-control" th:value="${member.loginId}" readonly>
+                </div>
 
-        <div>
-            <label for="latitude">위도</label>
-            <input type="text" id="latitude" name="latitude" class="form-control" th:value="${member.address.latitude}" readonly>
-        </div>
+                <div>
+                    <label for="username">회원명</label>
+                    <input type="text" id="username" name="username" class="form-control" th:value="${member.username}"
+                           readonly>
+                </div>
 
-        <div>
-            <label for="longitude">경도</label>
-            <input type="text" id="longitude" name="longitude" class="form-control" th:value="${member.address.longitude}" readonly>
-        </div>
+                <div>
+                    <label for="latitude">위도</label>
+                    <input type="text" id="latitude" name="latitude" class="form-control" th:value="${member.address.latitude}"
+                           readonly>
+                </div>
 
-        <div>
-            <label for="parties">팟</label>
-            <input type="text" id="parties" name="parties" class="form-control" th:value="${#lists.size(member.parties)}" readonly>
-        </div>
+                <div>
+                    <label for="longitude">경도</label>
+                    <input type="text" id="longitude" name="longitude" class="form-control"
+                           th:value="${member.address.longitude}" readonly>
+                </div>
 
-        <hr class="my-4">
-        <div class="row">
-            <div class="col">
-                <button class="w-100 btn btn-primary btn-lg"
-                        th:onclick="|location.href='@{/member/edit}'|"
-                        type="button">회원정보수정</button>
+                <div>
+                    <label for="parties">팟</label>
+                    <input type="text" id="parties" name="parties" class="form-control"
+                           th:value="${#lists.size(member.parties)}" readonly>
+                </div>
+
+                <hr class="my-4">
+                <div class="row">
+                    <div class="col">
+                        <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/member/edit}'|"
+                                type="button">회원정보수정</button>
+                    </div>
+                    <div class="col">
+                        <button class="w-100 btn btn-secondary btn-lg" th:onclick="|location.href='@{/}'|"
+                                type="button">홈으로</button>
+                    </div>
+                </div>
+
             </div>
-            <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
-                        th:onclick="|location.href='@{/}'|"
-                        type="button">홈으로</button>
-            </div>
         </div>
-    </div>
+    </main>
 </div> <!-- /container -->
 </body>
+
 </html>

@@ -1,79 +1,125 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-    .container {
-        max-width: 560px;
-    }
     .field-error {
-        border-color: #dc3545;
-        color : #dc3545;
+      border-color: #dc3545;
+      color: #dc3545;
     }
-    </style>
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="py-5 text-center">
-        <h2>회원가입</h2>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                </ul>
+                <form class="me-lg-3">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <form th:action="@{/logout}" method="post" class="text-end">
+                    <button class="btn btn-outline-light me-2" type="submit">Log out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container" style="padding: 100px 0;">
+    <div class="text-center">
+        <div class="form-signin">
+
+            <form th:action th:object="${member}" method="post">
+
+                <h1 class="h3 mb-3 fw-normal">Sign Up!</h1>
+
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error" name="loginId"
+                           class="form-control" placeholder="아이디를 입력하세요">
+                    <label for="loginId">아이디</label>
+                    <div class="field-error" th:errors="*{loginId}"></div>
+                </div>
+
+                <div class="mb-3"> </div>
+
+                <div class="form-floating">
+                    <input type="text" id="username" th:field="*{username}" th:errorclass="field-error" name="username"
+                           class="form-control" placeholder="회원이름을 입력하세요">
+                    <label for="username">회원명</label>
+                    <div class="field-error" th:errors="*{username}"></div>
+                </div>
+
+                <div class="mb-3"> </div>
+
+                <div class="form-floating">
+                    <input type="password" id="password" th:field="*{password}" th:errorclass="field-error" name="password"
+                           class="form-control" placeholder="비밀번호를 입력하세요">
+                    <label for="password">비밀번호</label>
+                    <div class="field-error" th:errors="*{password}"></div>
+                </div>
+
+                <div class="mb-3"> </div>
+
+                <div class="form-floating">
+                    <input type="text" id="latitude" th:field="*{latitude}" th:errorclass="field-error" name="latitude"
+                           class="form-control" placeholder="주소(위도)를 입력하세요">
+                    <label for="latitude">위도</label>
+                    <div class="field-error" th:errors="*{latitude}"></div>
+                </div>
+
+                <div class="mb-3"> </div>
+
+                <div class="form-floating">
+                    <input type="text" id="longitude" th:field="*{longitude}" th:errorclass="field-error" name="longitude"
+                           class="form-control" placeholder="주소(경도)를 입력하세요">
+                    <label for="longitude">경도</label>
+                    <div class="field-error" th:errors="*{longitude}"></div>
+                </div>
+
+                <div class="mb-3"> </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">회원 등록</button>
+                    </div>
+                    <div class="col">
+                        <button class="w-100 btn btn-secondary btn-lg" th:onclick="|location.href='@{/}'|"
+                                type="button">홈으로 돌아가기</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
     </div>
-
-    <h4 class="mb-3">회원 정보 입력</h4>
-
-    <form th:action th:object="${member}" method="post">
-
-        <div>
-            <label for="loginId">아이디</label>
-            <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error"
-                   name="loginId" class="form-control" placeholder="아이디를 입력하세요">
-            <div class="field-error" th:errors="*{loginId}"> 아이디 오류</div>
-        </div>
-
-        <div>
-            <label for="username">회원명</label>
-            <input type="text" id="username" th:field="*{username}" th:errorclass="field-error"
-                   name="username" class="form-control" placeholder="회원이름을 입력하세요">
-            <div class="field-error" th:errors="*{username}"> 회원명 오류</div>
-        </div>
-
-        <div>
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" th:field="*{password}" th:errorclass="field-error"
-                   name="password" class="form-control" placeholder="비밀번호를 입력하세요">
-            <div class="field-error" th:errors="*{password}"> 비밀번호 오류</div>
-        </div>
-
-        <div>
-            <label for="latitude">위도</label>
-            <input type="text" id="latitude" th:field="*{latitude}" th:errorclass="field-error"
-                   name="latitude" class="form-control" placeholder="주소(위도)를 입력하세요">
-            <div class="field-error" th:errors="*{latitude}"> 위도 오류</div>
-        </div>
-
-        <div>
-            <label for="longitude">경도</label>
-            <input type="text" id="longitude" th:field="*{longitude}" th:errorclass="field-error"
-                   name="longitude" class="form-control" placeholder="주소(경도)를 입력하세요">
-            <div class="field-error" th:errors="*{longitude}"> 경도 오류</div>
-        </div>
-
-        <hr class="my-4">
-        <div class="row">
-            <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">회원 등록</button>
-            </div>
-            <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
-                        th:onclick="|location.href='@{/}'|"
-                        type="button">취소</button>
-            </div>
-        </div>
-
-    </form>
-
 </div> <!-- /container -->
 </body>
+
 </html>

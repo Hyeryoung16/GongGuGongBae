@@ -1,60 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-    .container {
-        max-width: 560px;
-    }
     .field-error {
-        border-color: #dc3545;
-        color : #dc3545;
+      border-color: #dc3545;
+      color: #dc3545;
     }
-    </style>
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container" style="max-width: 600px">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" href="#">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="py-5 text-center">
-        <h2>로그인</h2>
-    </div>
-
-    <form th:action th:object="${loginForm}" method="post">
-
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">SIGN IN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/signup}">SIGN UP</a>
+                    </li>
+                </ul>
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
         </div>
+    </nav>
+</header>
+<div class="container" style="padding: 100px 0;">
+    <div class="text-center">
+        <div class="form-signin">
 
-        <div>
-            <label for="loginId">아이디</label>
-            <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error"
-                   name="loginId" class="form-control" placeholder="아이디를 입력하세요">
-            <div class="field-error" th:errors="*{loginId}" />
-        </div>
+            <form th:action th:object="${loginForm}" method="post">
 
-        <div>
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" th:field="*{password}" th:errorclass="field-error"
-                   name="password" class="form-control" placeholder="비밀번호를 입력하세요">
-            <div class="field-error" th:errors="*{password}" />
-        </div>
+                <h1 class="h3 mb-3 fw-normal">Welcome Back!</h1>
 
-        <hr class="my-4">
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+                </div>
 
-        <div class="row">
-            <div class="col">
+                <div class="form-floating">
+                    <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error" name="loginId"
+                           class="form-control" placeholder="아이디를 입력하세요">
+                    <label for="loginId">아이디</label>
+                    <div class="field-error" th:errors="*{loginId}" />
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" id="password" th:field="*{password}" th:errorclass="field-error" name="password"
+                           class="form-control" placeholder="비밀번호를 입력하세요">
+                    <label for="password">비밀번호</label>
+                    <div class="field-error" th:errors="*{password}" />
+                </div>
+
+                <div class="mb-3"> </div>
+
                 <button class="w-100 btn btn-primary btn-lg" type="submit">로그인</button>
-            </div>
-            <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
-                        th:onclick="|location.href='@{/signup}'|"
-                        type="button">회원가입</button>
-            </div>
-        </div>
 
-    </form>
-</div> <!-- /container -->
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -1,112 +1,147 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
-    .container {
-        max-width: 560px;
-    }
     .field-error {
-        border-color: #dc3545;
-        color : #dc3545;
+      border-color: #dc3545;
+      color: #dc3545;
     }
-    </style>
+
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="py-5 text-center">
-        <h2>팟 생성</h2>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                </ul>
+                <form class="me-lg-3">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <form th:action="@{/logout}" method="post" class="text-end">
+                    <button class="btn btn-outline-light me-2" type="submit">Log out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container" style="padding: 100px 0;">
+    <div class="text-center">
+        <div class="form-signin">
+
+            <form th:action th:object="${party}" method="post">
+
+                <h1 class="h3 mb-3 fw-normal">Create Party</h1>
+
+                <div class="form-floating">
+                    <input type="text" id="item.itemName" th:field="*{item.itemName}" th:errorclass="field-error"
+                           name="item.itemName" class="form-control" placeholder="상품명을 입력하세요">
+                    <label for="item.itemName">상품명(구매처)</label>
+                    <div class="field-error" th:errors="*{item.itemName}"> 상품명 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="item.itemRefLink" th:field="*{item.itemRefLink}" th:errorclass="field-error"
+                           name="item.itemRefLink" class="form-control" placeholder="상품링크를 입력하세요">
+                    <label for="item.itemRefLink">상품링크</label>
+                    <div class="field-error" th:errors="*{item.itemRefLink}"> 상품링크 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="item.itemMinOrderPrice" th:field="*{item.itemMinOrderPrice}" th:errorclass="field-error"
+                           name="item.itemMinOrderPrice" class="form-control" placeholder="최소주문금액을 입력하세요">
+                    <label for="item.itemMinOrderPrice">최소주문금액</label>
+                    <div class="field-error" th:errors="*{item.itemMinOrderPrice}"> 최소주문금액 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="item.itemDeliveryPrice" th:field="*{item.itemDeliveryPrice}" th:errorclass="field-error"
+                           name="item.itemDeliveryPrice" class="form-control" placeholder="배송(배달)비를 입력하세요">
+                    <label for="item.itemDeliveryPrice">배송(배달)비</label>
+                    <div class="field-error" th:errors="*{item.itemDeliveryPrice}"> 배송(배달)비 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="partyMemberNum" th:field="*{partyMemberNum}" th:errorclass="field-error"
+                           name="partyMemberNum" class="form-control" placeholder="인원수를 입력하세요">
+                    <label for="partyMemberNum">인원수</label>
+                    <div class="field-error" th:errors="*{partyMemberNum}"> 인원수 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="duration" th:field="*{duration}" th:errorclass="field-error"
+                           name="duration" class="form-control" placeholder="모집기간을 입력하세요">
+                    <label for="duration">모집기간</label>
+                    <div class="field-error" th:errors="*{duration}"> 모집기간 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="minOrderPricePerMember" th:field="*{minOrderPricePerMember}" th:errorclass="field-error"
+                           name="minOrderPricePerMember" class="form-control" placeholder="인당 최소 주문 금액을 입력하세요">
+                    <label for="minOrderPricePerMember">인당 최소 주문 금액</label>
+                    <div class="field-error" th:errors="*{minOrderPricePerMember}"> 인당 최소 주문 금액 오류</div>
+                </div>
+
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                       th:text="${err}">글로벌 오류 메시지</p>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="receiveLocation.latitude" th:field="*{receiveLocation.latitude}" th:errorclass="field-error"
+                           name="receiveLocation.latitude" class="form-control" placeholder="수령장소(위도)를 입력하세요">
+                    <label for="receiveLocation.latitude">수령장소 - 위도</label>
+                    <div class="field-error" th:errors="*{receiveLocation.latitude}"> 수령장소(위도) 오류</div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" id="receiveLocation.longitude" th:field="*{receiveLocation.longitude}" th:errorclass="field-error"
+                           name="receiveLocation.longitude" class="form-control" placeholder="수령장소(경도)를 입력하세요">
+                    <label for="receiveLocation.longitude">수령장소 - 경도</label>
+                    <div class="field-error" th:errors="*{receiveLocation.longitude}"> 수령장소(경도) 오류</div>
+                </div>
+
+                <div class="mb-3"> </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">팟 등록</button>
+                    </div>
+                    <div class="col">
+                        <button class="w-100 btn btn-secondary btn-lg"
+                                th:onclick="|location.href='@{/}'|"
+                                type="button">취소</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
     </div>
-
-    <h4 class="mb-3">팟 정보 입력</h4>
-
-    <form th:action th:object="${party}" method="post">
-
-        <div>
-            <label for="item.itemName">상품명(구매처)</label>
-            <input type="text" id="item.itemName" th:field="*{item.itemName}" th:errorclass="field-error"
-                   name="item.itemName" class="form-control" placeholder="상품명을 입력하세요">
-            <div class="field-error" th:errors="*{item.itemName}"> 상품명 오류</div>
-        </div>
-
-        <div>
-            <label for="item.itemRefLink">상품링크</label>
-            <input type="text" id="item.itemRefLink" th:field="*{item.itemRefLink}" th:errorclass="field-error"
-                   name="item.itemRefLink" class="form-control" placeholder="상품링크를 입력하세요">
-            <div class="field-error" th:errors="*{item.itemRefLink}"> 상품링크 오류</div>
-        </div>
-
-        <div>
-            <label for="item.itemMinOrderPrice">최소주문금액</label>
-            <input type="text" id="item.itemMinOrderPrice" th:field="*{item.itemMinOrderPrice}" th:errorclass="field-error"
-                   name="item.itemMinOrderPrice" class="form-control" placeholder="최소주문금액을 입력하세요">
-            <div class="field-error" th:errors="*{item.itemMinOrderPrice}"> 최소주문금액 오류</div>
-        </div>
-
-        <div>
-            <label for="item.itemDeliveryPrice">배송(배달)비</label>
-            <input type="text" id="item.itemDeliveryPrice" th:field="*{item.itemDeliveryPrice}" th:errorclass="field-error"
-                   name="item.itemDeliveryPrice" class="form-control" placeholder="배송(배달)비를 입력하세요">
-            <div class="field-error" th:errors="*{item.itemDeliveryPrice}"> 배송(배달)비 오류</div>
-        </div>
-
-        <div>
-            <label for="partyMemberNum">인원수</label>
-            <input type="text" id="partyMemberNum" th:field="*{partyMemberNum}" th:errorclass="field-error"
-                   name="partyMemberNum" class="form-control" placeholder="인원수를 입력하세요">
-            <div class="field-error" th:errors="*{partyMemberNum}"> 인원수 오류</div>
-        </div>
-
-        <div>
-            <label for="duration">모집기간</label>
-            <input type="text" id="duration" th:field="*{duration}" th:errorclass="field-error"
-                   name="duration" class="form-control" placeholder="모집기간을 입력하세요">
-            <div class="field-error" th:errors="*{duration}"> 모집기간 오류</div>
-        </div>
-
-        <div>
-            <label for="minOrderPricePerMember">인당 최소 주문 금액</label>
-            <input type="text" id="minOrderPricePerMember" th:field="*{minOrderPricePerMember}" th:errorclass="field-error"
-                   name="minOrderPricePerMember" class="form-control" placeholder="인당 최소 주문 금액을 입력하세요">
-            <div class="field-error" th:errors="*{minOrderPricePerMember}"> 인당 최소 주문 금액 오류</div>
-        </div>
-
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
-               th:text="${err}">글로벌 오류 메시지</p>
-        </div>
-
-        <div>
-            <label for="receiveLocation.latitude">수령장소 - 위도</label>
-            <input type="text" id="receiveLocation.latitude" th:field="*{receiveLocation.latitude}" th:errorclass="field-error"
-                   name="receiveLocation.latitude" class="form-control" placeholder="수령장소(위도)를 입력하세요">
-            <div class="field-error" th:errors="*{receiveLocation.latitude}"> 수령장소(위도) 오류</div>
-        </div>
-
-        <div>
-            <label for="receiveLocation.longitude">수령장소 - 경도</label>
-            <input type="text" id="receiveLocation.longitude" th:field="*{receiveLocation.longitude}" th:errorclass="field-error"
-                   name="receiveLocation.longitude" class="form-control" placeholder="수령장소(경도)를 입력하세요">
-            <div class="field-error" th:errors="*{receiveLocation.longitude}"> 수령장소(경도) 오류</div>
-        </div>
-
-        <hr class="my-4">
-        <div class="row">
-            <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">팟 등록</button>
-            </div>
-            <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg"
-                        th:onclick="|location.href='@{/}'|"
-                        type="button">취소</button>
-            </div>
-        </div>
-
-    </form>
-
 </div> <!-- /container -->
 </body>
+
 </html>

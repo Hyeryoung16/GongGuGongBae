@@ -23,10 +23,10 @@
 
     <div class="row">
         <div th:each="party : ${parties}" class="card" style="width: 18rem;">
-            <div class="card-body">
+            <div class="card-body" th:classappend="${party.memberId} == ${member.id} ? bg-danger">
                 <h5 class="card-title" th:text="${party.item.itemName}"></h5>
                 <p class="card-text"> 팟 정보들이 들어갈 공간입니다 </p>
-                <form th:action="@{/party/participate}" method="post">
+                <form th:action="@{/party/participate/{partyId}(partyId=${party.partyId})}" method="post">
                     <button class="w-100 btn btn-dark btn-lg" type="submit" th:onclick="|location.href='@{/}'|"> 팟 참가 </button>
                 </form>
                 <a href="/" class="btn btn-primary">자세히</a>

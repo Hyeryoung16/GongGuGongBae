@@ -68,14 +68,26 @@ public class PartyServiceImpl implements PartyService{
     }
 
     @Override
-    public boolean deletePartyById(Long memberId, Long partyId){
+    public void participateParty(Long partyId, Long memberId) {
+        Party party = partyRepository.findById(partyId);
+        party.getPartyMembers().add(memberId); // 팟에 멤버 추가
+
+        Member member = memberRepository.findById(memberId);
+        member.getParties().add(partyId); // 멤버에 참가 팟 추가
+    }
+
+    @Override
+    public boolean deletePartyById(Long partyId){
+        /*
         if( findPartyById(partyId).getMemberId() == memberId) {
             partyRepository.deleteById(partyId);
             return true;
         }
         else {
             return false; // TODO : 삭제 실패 했을 때 에러 처리
-        }
+        }*/
+        partyRepository.deleteById(partyId);
+        return true;
     }
 
     /*Temp*/

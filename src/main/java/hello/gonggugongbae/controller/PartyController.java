@@ -15,10 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -75,18 +72,10 @@ public class PartyController {
         return "redirect:/";
     }
 
-    @PostConstruct void init(){
-        Item item1 = new Item("배민-엽떡", "www.hello.com", 8000, 3000);
-        Party party1 = new Party(1L, item1, 3, 30, 3000, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
+    @PostMapping("/participate/{partyId}")
+    public String participate(@Login Member member, @PathVariable("partyId") String partyId){
+        log.info("참가 원하는 파티 아디디는 = {}", partyId);
 
-        Item item2 = new Item("11번가-휴지", "www.world.com", 0, 2500);
-        Party party2 = new Party(1L, item2, 2, 240, 0, new Location(MyLocation.GYM_LAT, MyLocation.GYM_LON));
-
-        Item item3 = new Item("요기요-마라탕", "www.gg-gb.com", 9000, 4000);
-        Party party3 = new Party(2L, item3, 4, 60, 3500, new Location(MyLocation.PARK_LAT, MyLocation.PARK_LON));
-
-        partyService.createParty(party1);
-        partyService.createParty(party2);
-        partyService.createParty(party3);
+        return "redirect:/";
     }
 }

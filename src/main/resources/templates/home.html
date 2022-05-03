@@ -1,33 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Pumpkin Market</title>
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" href="#">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<div class="container" style="max-width: 600px">
-    <div class="py-5 text-center">
-        <h2>호박마켓</h2>
-    </div>
-    <div class="row">
-        <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg" type="button"
-                    th:onclick="|location.href='@{/signup}'|">
-                회원 가입
-            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">SIGN IN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/signup}">SIGN UP</a>
+                    </li>
+                </ul>
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
         </div>
-        <div class="col">
-            <button class="w-100 btn btn-dark btn-lg"
-                    onclick="location.href='items.html'"
-                    th:onclick="|location.href='@{/login}'|" type="button">
-                로그인
-            </button>
-        </div>
-    </div>
-    <hr class="my-4">
+    </nav>
+</header>
+<div class="container">
+
 </div> <!-- /container -->
 
 </body>

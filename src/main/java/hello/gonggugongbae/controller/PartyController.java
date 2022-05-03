@@ -73,9 +73,9 @@ public class PartyController {
     }
 
     @PostMapping("/participate/{partyId}")
-    public String participate(@Login Member member, @PathVariable("partyId") String partyId){
+    public String participate(@Login Member member, @PathVariable("partyId") Long partyId){
         log.info("참가 원하는 파티 아디디는 = {}", partyId);
-
+        partyService.participateParty(partyId, member.getId());
         return "redirect:/";
     }
 }

@@ -6,12 +6,14 @@ import hello.gonggugongbae.domain.location.LocationPolicyImpl;
 import hello.gonggugongbae.domain.member.Member;
 import hello.gonggugongbae.domain.member.MemberRepository;
 import hello.gonggugongbae.domain.member.MemberRepositoryMemory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class PartyServiceImpl implements PartyService{
 
@@ -70,6 +72,17 @@ public class PartyServiceImpl implements PartyService{
     @Override
     public void participateParty(Long partyId, Long memberId) {
         Party party = partyRepository.findById(partyId);
+        List<Long> partyMembers = party.getPartyMembers();
+
+        if (partyMembers.contains(memberId)) {
+            log.info("이미 참가한 팟입니다.");
+            return;
+        }
+
+        if (partyMembers.size() >= party.getPartyMemberNum()) {
+            log.info("모집인원이 마감되었습니다");
+        }
+
         party.getPartyMembers().add(memberId); // 팟에 멤버 추가
 
         Member member = memberRepository.findById(memberId);

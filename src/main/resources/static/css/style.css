@@ -1,3 +1,7 @@
+.navbar {
+  height : 6rem
+}
+
 .section-divide{
   display: block;
   width: 100%;
@@ -7,12 +11,14 @@
   opacity: 0.2;
 }
 
-.sign-in {
+.sign-in,
+.sign-up {
   padding : 4rem 0;
   display : block;
 }
 
-.sign-in-container{
+.sign-in-container,
+.sign-up-container{
   position: relative;
   width: 100%;
   max-width: 992px;
@@ -21,13 +27,15 @@
   padding-left: 1rem;
 }
 
-.sign-in-wrapper{
+.sign-in-wrapper,
+.sign-up-wrapper{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.sign-in-form{
+.sign-in-form,
+.sign-up-form{
   width: 100%;
   max-width: 50%;
 }
@@ -74,7 +82,8 @@
   flex-direction: row-reverse;
 }
 
-.form-button-group .login-button{
+.form-button-group .login-button,
+.form-button-group .signup-button{
   border: 2px solid var(--color-dark-pink);
   border-radius: 100px;
   padding: 0.5rem 1rem;
@@ -85,8 +94,11 @@
   text-align: center;
 }
 
-.sign-in-sign-up {
+.sign-in-sign-up,
+.sign-up-sign-in,
+.sign-up-go-home {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 0.8rem;
 }

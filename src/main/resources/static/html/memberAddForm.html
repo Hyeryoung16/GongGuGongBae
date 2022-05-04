@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
   <link th:href="@{/css/global.css}" href="../css/global.css" rel="stylesheet">
   <link th:href="@{/css/style.css}" href="../css/style.css" rel="stylesheet">
@@ -40,46 +40,74 @@
       </div>
     </nav>
   </header>
-  <div class="sign-in">
-    <div class="sign-in-container">
-      <div class="sign-in-wrapper">
-        <article class="sign-in-form">
-          <h2 class="page-heading"> Welcome Back! </h2>
-          <form th:action th:object="${loginForm}" method="post">
+  <div class="sign-up">
+    <div class="sign-up-container">
+      <div class="sign-up-wrapper">
+        <article class="sign-up-from">
+          <h2 class="page-heading">Create a new accout</h2>
+          <form th:action th:object="${member}" method="post">
 
             <div class="notice" th:if="${#fields.hasGlobalErrors()}">
               <p class="form-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
             </div>
-
+  
             <div class="form-group">
               <label class="form-label" for="loginId">ID
                 <input type="text" id="loginId" th:field="*{loginId}" th:errorclass="field-error" name="loginId"
-              class="form-control" placeholder="ID를 입력하세요">
-              <div class="form-error-msg" th:errors="*{loginId}">아이디 오류 메세지</div>
+                class="form-control" placeholder="ID를 입력하세요">
+                <div class="form-error-msg" th:errors="*{loginId}">아이디 오류 메세지</div>
+              </label>
+            </div>
+  
+            <div class="form-group">
+              <label class="form-label" for="username">회원명
+                <input type="text" id="username" th:field="*{username}" th:errorclass="field-error" name="username"
+                class="form-control" placeholder="회원이름을 입력하세요">
+                <div class="form-error-msg" th:errors="*{username}">회원명 오류 메세지</div>
+              </label>
+            </div>
+  
+            <div class="form-group">
+              <label class="form-label" for="password">비밀번호
+                <input type="password" id="password" th:field="*{password}" th:errorclass="field-error" name="password"
+                class="form-control" placeholder="비밀번호를 입력하세요">
+                <div class="form-error-msg" th:errors="*{password}">비밀번호 오류 메세지</div>
               </label>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="password">비밀번호
-                <input type="password" id="password" th:field="*{password}" th:errorclass="field-error" name="password"
-              class="form-control" placeholder="비밀번호를 입력하세요">
-              <div class="form-error-msg" th:errors="*{password}">비밀번호 오류 메세지</div>
+              <label class="form-label" for="latitude">위도
+                <input type="text" id="latitude" th:field="*{latitude}" th:errorclass="field-error" name="latitude"
+                class="form-control" placeholder="주소(위도)를 입력하세요">
+                <div class="form-error-msg" th:errors="*{latitude}">위도 오류 메세지</div>
+              </label>
+
+              <label class="form-label" for="longitude">경도
+                <input type="text" id="longitude" th:field="*{longitude}" th:errorclass="field-error" name="longitude"
+                class="form-control" placeholder="주소(경도)를 입력하세요">
+                <div class="form-error-msg" th:errors="*{longitude}">경도 오류 메세지</div>
               </label>
             </div>
 
             <div class="form-button-group">
-              <button class="button login-button" type="submit">로그인</button>
+              <button class="button signup-button" type="submit">회원 등록</button>
             </div>
-
+  
           </form>
           <span class="section-divide"></span>
         </article>
 
-        <aside class="sign-in-sign-up">
-          <a th:href="@{/signup}"> Create a new account </a>
+        <aside class="sign-up-sign-in">
+          <a th:href="@{/login}"> I already have an account </a>
         </aside>
+
+        <aside class="sign-up-go-home">
+          <a th:href="@{/}"> Go to home </a>
+        </aside>
+
       </div>
     </div>
+  </div> <!-- /container -->
 </body>
 
 </html>

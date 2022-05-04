@@ -17,9 +17,9 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-@RequestMapping("/test")
+@RequestMapping("/rest")
 @RestController
-public class TestController {
+public class RESTController {
 
     private final PartyService partyService;
     private final MemberService memberService;

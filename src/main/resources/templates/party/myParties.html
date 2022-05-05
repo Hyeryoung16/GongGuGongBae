@@ -4,19 +4,8 @@
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-    .field-error {
-      border-color: #dc3545;
-      color: #dc3545;
-    }
-
-    .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-  </style>
+    <link th:href="@{/css/global.css}" href="../css/global.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" href="../css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,62 +37,53 @@
         </div>
     </nav>
 </header>
-<div class="container" style="padding: 100px 0;">
-    <main class="row">
-        <div class="col-3 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a th:href="@{/member}" class="nav-link text-white">
-                        Profile
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/member/parties}" class="nav-link active">
-                        Parties
-                    </a>
-                </li>
-            </ul>
-            <hr>
-        </div>
-        <div class="col-9 text-center">
-            <div class="form-signin">
+<div class="my-page">
+    <div class="my-page-container">
+        <div class="my-page-wrapper">
+            <aside class="my-page-sidemenu">
+                <ul>
+                    <li><a th:href="@{/member}" class="active">Profile</a></li>
+                    <li><a th:href="@{/member/parties}" class="active">My Parties</a></li>
+                </ul>
+            </aside>
+            <article class="member-parties">
 
-                <h1 class="h3 mb-3 fw-normal">My Parties</h1>
+                <h2 class="page-heading">My Parties</h2>
 
-                <div class="row">
-                    <div th:each="party : ${myParties}" class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${party.item.itemName}"></h5>
-                            <p class="card-text">
+                <div class="cards-group">
+                    <div th:each="party : ${myParties}" class="party-card">
+                        <div class="party-card-body">
+                            <h3 class="party-card-title" th:text="${party.item.itemName}">팟이름팟이름팟이름팟이름팟이름</h3>
+                            <p class="party-card-text">
                             <ul>
                                 <li th:text="${party.partyId}">ID</li>
                                 <li th:text="${party.memberId}">10000</li>
 
-                                <li th:text="${party.item.itemName}" ></li>
-                                <li th:text="${party.item.itemRefLink}" ></li>
-                                <li th:text="${party.item.itemMinOrderPrice}" ></li>
-                                <li th:text="${party.item.itemDeliveryPrice}" ></li>
+                                <li th:text="${party.item.itemName}">상품명</li>
+                                <li th:text="${party.item.itemRefLink}">상품링크</li>
+                                <li th:text="${party.item.itemMinOrderPrice}">최소주문금액</li>
+                                <li th:text="${party.item.itemDeliveryPrice}">배송/배달비</li>
 
-                                <li th:text="${party.partyMemberNum}">10000</li>
-                                <li th:text="${party.duration}">10000</li>
-                                <li th:text="${party.minOrderPricePerMember}">10000</li>
+                                <li th:text="${party.partyMemberNum}">모집인원</li>
+                                <li th:text="${party.duration}">모집기간</li>
+                                <li th:text="${party.minOrderPricePerMember}">인당최소주문금액</li>
 
-                                <li th:text="${party.receiveLocation.latitude}"></li>
-                                <li th:text="${party.receiveLocation.longitude}"></li>
+                                <li th:text="${party.receiveLocation.latitude}">수령장소(위도)</li>
+                                <li th:text="${party.receiveLocation.longitude}">수령장소(경도)</li>
                             </ul>
-                            <ul>
-                                <li th:each="member : ${party.partyMembers}" th:text="${member}"></li>
-                            </ul>
+                            <!--<ul>
+                              <li th:each="member : ${party.partyMembers}" th:text="${member}">팟참가멤버</li>
+                            </ul>-->
                             </p>
-                            <a href="/" class="btn btn-primary">자세히</a>
-                        </div>
-                    </div>
-                </div>
+                            <a th:href="@{/}" class="btn btn-primary">자세히</a>
+                        </div> <!--card-body-->
+                    </div> <!--card-->
+                </div> <!--cards-group-->
 
-            </div>
+            </article>
         </div>
-    </main>
+
+    </div>
 </div> <!-- /container -->
 </body>
 

@@ -4,19 +4,8 @@
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-    .field-error {
-      border-color: #dc3545;
-      color: #dc3545;
-    }
-
-    .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-  </style>
+    <link th:href="@{/css/global.css}" href="../css/global.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" href="../css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,78 +37,71 @@
         </div>
     </nav>
 </header>
-<div class="container" style="padding: 100px 0;">
-    <main class="row">
-        <div class="col-3 d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a th:href="@{/member}" class="nav-link active">
-                        Profile
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/member/parties}" class="nav-link text-white">
-                        Parties
-                    </a>
-                </li>
-            </ul>
-            <hr>
+<div class="my-page">
+    <div class="my-page-container">
+        <div class="my-page-wrapper">
+            <aside class="my-page-sidemenu">
+                <ul>
+                    <li><a th:href="@{/member}" class="active">Profile</a></li>
+                    <li><a th:href="@{/member/parties}" class="active">My Parties</a></li>
+                </ul>
+            </aside>
+            <article class="member-profile">
+                <h2 class="page-heading">Profile</h2>
+
+                <div class="form-group">
+                    <label class="form-label" for="memberId">Index
+                        <input type="text" id="memberId" name="memberId" class="form-control" th:value="${member.id}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="loginId">아이디
+                        <input type="text" id="loginID" name="loginId" class="form-control" th:value="${member.loginId}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="username">회원명
+                        <input type="text" id="username" name="username" class="form-control" th:value="${member.username}"
+                               readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="latitude">위도
+                        <input type="text" id="latitude" name="latitude" class="form-control" th:value="${member.address.latitude}"
+                               readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="longitude">경도
+                        <input type="text" id="longitude" name="longitude" class="form-control"
+                               th:value="${member.address.longitude}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="parties">팟
+                        <input type="text" id="parties" name="parties" class="form-control"
+                               th:value="${#lists.size(member.parties)}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-button-group">
+                    <button class="member-edit-button" th:onclick="|location.href='@{/member/edit}'|"
+                            type="button">회원 정보 수정</button>
+                </div>
+
+                <span class="section-divide"></span>
+
+                <div class="member-profile-go-home">
+                    <a th:href="@{/}"> Go Back to Home </a>
+                </div>
+            </article>
         </div>
-        <div class="col-9 text-center">
-            <div class="form-signin">
-
-                <h1 class="h3 mb-3 fw-normal">Edit Profile</h1>
-
-                <div>
-                    <label for="memberId">ID</label>
-                    <input type="text" id="memberId" name="memberId" class="form-control" th:value="${member.id}" readonly>
-                </div>
-
-                <div>
-                    <label for="loginId">아이디</label>
-                    <input type="text" id="loginID" name="loginId" class="form-control" th:value="${member.loginId}" readonly>
-                </div>
-
-                <div>
-                    <label for="username">회원명</label>
-                    <input type="text" id="username" name="username" class="form-control" th:value="${member.username}"
-                           readonly>
-                </div>
-
-                <div>
-                    <label for="latitude">위도</label>
-                    <input type="text" id="latitude" name="latitude" class="form-control" th:value="${member.address.latitude}"
-                           readonly>
-                </div>
-
-                <div>
-                    <label for="longitude">경도</label>
-                    <input type="text" id="longitude" name="longitude" class="form-control"
-                           th:value="${member.address.longitude}" readonly>
-                </div>
-
-                <div>
-                    <label for="parties">팟</label>
-                    <input type="text" id="parties" name="parties" class="form-control"
-                           th:value="${#lists.size(member.parties)}" readonly>
-                </div>
-
-                <hr class="my-4">
-                <div class="row">
-                    <div class="col">
-                        <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/member/edit}'|"
-                                type="button">회원정보수정</button>
-                    </div>
-                    <div class="col">
-                        <button class="w-100 btn btn-secondary btn-lg" th:onclick="|location.href='@{/}'|"
-                                type="button">홈으로</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </main>
+    </div>
 </div> <!-- /container -->
 </body>
 

@@ -1,0 +1,42 @@
+.banner{
+  display : flex;
+  height: 20rem;
+  background-color: antiquewhite;
+}
+
+.banner-container{
+  margin : 0 auto;
+  padding : 4rem 1rem;
+}
+
+.banner-wrapper{
+  display: flex;
+}
+
+.section-heading {
+  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.section-subheading{
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.section-buttons{
+  display: flex;
+}
+
+.section-button{
+  box-sizing: inherit;
+  border: 2px solid var(--color-dark-pink);
+  border-radius: 100px;
+  background-color: var(--color-dark-pink);
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.7rem;
+  line-height: normal;
+  cursor: pointer;
+}

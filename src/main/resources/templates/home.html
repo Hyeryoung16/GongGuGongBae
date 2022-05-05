@@ -1,10 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <title>Pumpkin Market</title>
     <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/global.css}" href="../css/global.css" rel="stylesheet">
+    <link th:href="@{/css/style__home.css}" href="../css/style__home.css" rel="stylesheet">
 </head>
+
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
@@ -29,16 +33,29 @@
                         <a class="nav-link" th:href="@{/signup}">SIGN UP</a>
                     </li>
                 </ul>
-                <form>
+                <form class="me-lg-3">
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                 </form>
             </div>
         </div>
     </nav>
 </header>
-<div class="container" style="padding: 100px 0;">
-
-</div> <!-- /container -->
-
+<div class="home">
+    <section class="banner">
+        <div class="banner-container">
+            <div class="banner-wrapper">
+                <article class="section-content">
+                    <div class="section-headings">
+                        <h2 class="section-heading">Hello, This is GonGu-GongBae Platform</h2>
+                        <p class="section-subheading">주변에서 함께 물건 또는 음식을 주문/배송할 사람을 찾아보아요 :)</p>
+                    </div>
+                    <div class="section-buttons">
+                        <a class="section-button" th:href="@{/signup}">공구공배 함께하기</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

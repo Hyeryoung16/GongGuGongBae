@@ -83,8 +83,13 @@
   }
   
   p {
+    display: block;
     font-size: var(--font-regular);
     font-weight: var(--weight-regular);
     color: var(--color-black);
     margin : 0;
+  }
+
+  .navbar {
+    height : 6rem
   }

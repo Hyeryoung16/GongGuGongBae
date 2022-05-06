@@ -9,14 +9,16 @@
 
 .sign-in,
 .sign-up,
-.my-page {
+.my-page,
+.new-party {
   padding : 4rem 0;
   display : block;
 }
 
 .sign-in-container,
 .sign-up-container,
-.my-page-container{
+.my-page-container,
+.new-party-container{
   position: relative;
   width: 100%;
   max-width: 992px;
@@ -26,7 +28,8 @@
 }
 
 .sign-in-wrapper,
-.sign-up-wrapper{
+.sign-up-wrapper,
+.new-party-wrapper{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -57,7 +60,8 @@
 }
 
 .sign-in-form,
-.sign-up-form{
+.sign-up-form,
+.new-party-form{
   width: 100%;
   max-width: 50%;
 }
@@ -74,6 +78,10 @@
   font-weight: 400;
   margin-bottom: 2rem;
   text-align: center !important;
+}
+
+.form-group{
+  display : flex;
 }
 
 .form-error{

@@ -1,16 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <title>Pumpkin Market</title>
     <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/global.css}" href="../css/global.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" href="../css/style.css" rel="stylesheet">
 </head>
+
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -33,26 +38,54 @@
         </div>
     </nav>
 </header>
-<div class="container" style="padding: 100px 0;">
-    <div class="row">
-        <button class="w-100 btn btn-secondary btn-lg" type="button"
-                th:onclick="|location.href='@{/party/add}'|">팟 모집</button>
-    </div>
+<div class="login-home">
+    <div class="login-home-container">
+        <div class="login-home-wrapper">
+            <article class="login-home-parties">
+                <div class="form-button-group">
+                    <button class="party-add-button" type="button" th:onclick="|location.href='@{/party/add}'|">팟 모집</button>
+                </div>
+                <span class="section-divide"></span>
+                <div class="cards-group">
+                    <div th:each="party : ${parties}" class="party-card">
+                        <div class="party-card-body" th:classappend="${party.memberId} == ${member.id} ? 'bg-danger'">
+                            <h3 class="party-card-title" th:text="${party.item.itemName}">팟이름팟이름팟이름팟이름팟이름</h3>
+                            <p class="party-card-text">
+                            <ul>
+                                <li th:text="${party.partyId}">ID</li>
+                                <li th:text="${party.memberId}">10000</li>
 
-    <div class="row">
-        <div th:each="party : ${parties}" class="card" style="width: 18rem;">
-            <div class="card-body" th:classappend="${party.memberId} == ${member.id} ? 'bg-danger'">
-                <h5 class="card-title" th:text="${party.item.itemName}"></h5>
-                <p class="card-text"> 팟 정보들이 들어갈 공간입니다 </p>
-                <form th:action="@{/party/participate/{partyId}(partyId=${party.partyId})}" method="post">
-                    <button class="w-100 btn btn-dark btn-lg" type="submit" th:onclick="|location.href='@{/}'|"> 팟 참가 </button>
-                </form>
-                <a href="/" class="btn btn-primary">자세히</a>
-            </div>
+                                <li th:text="${party.item.itemName}">상품명</li>
+                                <li th:text="${party.item.itemRefLink}">상품링크</li>
+                                <li th:text="${party.item.itemMinOrderPrice}">최소주문금액</li>
+                                <li th:text="${party.item.itemDeliveryPrice}">배송/배달비</li>
+
+                                <li th:text="${party.partyMemberNum}">모집인원</li>
+                                <li th:text="${party.duration}">모집기간</li>
+                                <li th:text="${party.minOrderPricePerMember}">인당최소주문금액</li>
+
+                                <li th:text="${party.receiveLocation.latitude}">수령장소(위도)</li>
+                                <li th:text="${party.receiveLocation.longitude}">수령장소(경도)</li>
+                            </ul>
+                            <!--<ul>
+                                          <li th:each="member : ${party.partyMembers}" th:text="${member}">팟참가멤버</li>
+                                        </ul>-->
+                            </p>
+                            <form class="party-card-buttons" th:action="@{/party/participate/{partyId}(partyId=${party.partyId})}" method="post">
+                                <button class="party-card-button" type="submit"> 팟 참가 </button>
+                                <button class="party-card-button" th:onclick="|location.href='@{/}'|" type="button">자세히</button>
+                            </form>
+                        </div>
+                        <!--card-body-->
+                    </div>
+                    <!--card-->
+                </div>
+                <!--cards-group-->
+            </article>
         </div>
     </div>
-
 </div> <!-- /container -->
 
 </body>
+
 </html>

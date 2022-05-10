@@ -35,10 +35,11 @@ public class PartyController {
         return "party/allParties";
     }
 
-    @GetMapping("/")
-    public String myParties(){
-
-        return "party/parties";
+    @GetMapping("/{partyId}")
+    public String myParties(@PathVariable("partyId") Long partyId, Model model){
+        Party party = partyService.findPartyById(partyId);
+        model.addAttribute("party", party);
+        return "party/party";
     }
 
     @GetMapping("/add")

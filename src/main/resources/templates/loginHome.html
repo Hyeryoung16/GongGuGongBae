@@ -73,7 +73,7 @@
                             </p>
                             <form class="party-card-buttons" th:action="@{/party/participate/{partyId}(partyId=${party.partyId})}" method="post">
                                 <button class="party-card-button" type="submit"> 팟 참가 </button>
-                                <button class="party-card-button" th:onclick="|location.href='@{/}'|" type="button">자세히</button>
+                                <button class="party-card-button" th:onclick="|location.href='@{/party/{partyId}(partyId=${party.partyId})}'|" type="button">자세히</button>
                             </form>
                         </div>
                         <!--card-body-->

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/global.css}" href="../css/global.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">GonGuGongBae</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/member}">My Page</a>
+                    </li>
+                </ul>
+                <form class="me-lg-3">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <form th:action="@{/logout}" method="post" class="text-end">
+                    <button class="btn btn-outline-light me-2" type="submit">Log out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="my-page">
+    <div class="my-page-container">
+        <div class="my-page-wrapper">
+            <aside class="my-page-sidemenu">
+                <ul>
+                    <li><a th:href="@{/member}" class="active">Profile</a></li>
+                    <li><a th:href="@{/member/parties}" class="active">My Parties</a></li>
+                </ul>
+            </aside>
+            <article class="member-profile">
+                <h2 class="page-heading">Party Info.</h2>
+
+                <div class="form-group">
+                    <label class="form-label" for="memberId">Host
+                        <input type="text" id="memberId" name="memberId" class="form-control" th:value="${party.memberId}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="item.itemName">상품명
+                        <input type="text" id="item.itemName" name="item.itemName" class="form-control" th:value="${party.item.itemName}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="item.itemRefLink">상품링크
+                        <input type="text" id="item.itemRefLink" name="item.itemRefLink" class="form-control" th:value="${party.item.itemRefLink}"
+                               readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="item.itemMinOrderPrice">최소주문금액
+                        <input type="text" id="item.itemMinOrderPrice" name="item.itemMinOrderPrice" class="form-control" th:value="${party.item.itemMinOrderPrice}"
+                               readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="item.itemDeliveryPrice">배송/배달비
+                        <input type="text" id="item.itemDeliveryPrice" name="item.itemDeliveryPrice" class="form-control" th:value="${party.item.itemDeliveryPrice}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="partyMemberNum">모집인원
+                        <input type="text" id="partyMemberNum" name="partyMemberNum" class="form-control" th:value="${party.partyMemberNum}" readonly>
+                    </label>
+
+                    <label class="form-label" for="duration">모집기간
+                        <input type="text" id="duration" name="duration" class="form-control" th:value="${party.duration}" readonly>
+                    </label>
+
+                    <label class="form-label" for="minOrderPricePerMember">인당최소주문금액
+                        <input type="text" id="minOrderPricePerMember" name="minOrderPricePerMember" class="form-control" th:value="${party.minOrderPricePerMember}" readonly>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="receiveLocation.latitude">수령장소(위도)
+                        <input type="text" id="receiveLocation.latitude" name="receiveLocation.latitude" class="form-control" th:value="${party.receiveLocation.latitude}" readonly>
+                    </label>
+
+                    <label class="form-label" for="receiveLocation.longitude">수령장소(경도)
+                        <input type="text" id="receiveLocation.longitude" name="receiveLocation.longitude" class="form-control" th:value="${party.receiveLocation.longitude}" readonly>
+                    </label>
+                </div>
+
+                <span class="section-divide"></span>
+
+                <div class="member-profile-go-home">
+                    <a th:href="@{/}"> Go Back to Home </a>
+                </div>
+            </article>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+
+</html>

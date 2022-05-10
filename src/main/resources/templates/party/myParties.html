@@ -75,7 +75,7 @@
                               <li th:each="member : ${party.partyMembers}" th:text="${member}">팟참가멤버</li>
                             </ul>-->
                             </p>
-                            <a th:href="@{/}" class="btn btn-primary">자세히</a>
+                            <a th:href="@{/party/{partyId}(partyId=${party.partyId})}" class="btn btn-primary">자세히</a>
                         </div> <!--card-body-->
                     </div> <!--card-->
                 </div> <!--cards-group-->

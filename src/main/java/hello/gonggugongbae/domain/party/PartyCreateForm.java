@@ -17,6 +17,8 @@ public class PartyCreateForm {
     @NotNull
     @Range(min=2, max=10)
     private Integer partyMemberNum; // 인원
+    
+    // TODO : 팟 생성 시간
 
     @NotNull
     @Range(min=0, max=240)

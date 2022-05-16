@@ -14,6 +14,7 @@ public class Party {
     private Long memberId; // 팟 생성 회원
     private Item item; // 대상물건(음식)
     private Integer partyMemberNum; // 인원
+    // TODO : 팟 생성 시간
     private Integer duration; // 모집기간
     private Integer minOrderPricePerMember; // 인당 최소 주문 금액
     private Location receiveLocation; // 수령 장소
